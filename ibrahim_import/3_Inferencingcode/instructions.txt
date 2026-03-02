@@ -1,0 +1,20 @@
+1) Open PowerShell
+
+2) Go to your inference code folder
+
+Run this:
+
+cd "C:\Users\radie\Desktop\3_Inferencingcode"
+
+3) (Optional) Make sure your output folder exists
+
+If you already used INFER_OUT, this is fine to reuse.
+
+mkdir "C:\Users\radie\Desktop\3_Inferencingcode\INFER_OUT"
+
+4) Run inference on the new mesh (ONE LINE)
+
+Use this exact one-line command (with your new mesh path):
+
+& "C:\Users\radie\AppData\Local\Programs\Python\Python312\python.exe" "C:\Users\radie\Desktop\3_Inferencingcode\newinference.py" --ckpt "C:\Users\radie\Desktop\2_trainingprocess\TRAIN_OUT\best_model.pt" --msh "C:\Users\radie\Desktop\1_TrainingSIMS\realvesselSIM1\coronary_extracted_vessel.msh" --out_dir "C:\Users\radie\Desktop\3_Inferencingcode\INFER_OUT" --re 300 --export_csv --export_vtp --save_pred_pt --save_json
+

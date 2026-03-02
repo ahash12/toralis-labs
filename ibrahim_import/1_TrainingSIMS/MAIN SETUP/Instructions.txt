@@ -1,0 +1,19 @@
+1) Open Git Bash and go to your case folder
+
+cd "/c/Users/radie/Desktop/1_TrainingSIMS/mocktest"
+
+2. edit the script if you want 
+
+nano run_bifurcation_robust.sh
+
+3. Confirm Fluent executable path
+
+FLUENT="/c/PROGRA~1/ANSYSI~1/v252/fluent/ntbin/win64/fluent.exe"
+
+4. make executable 
+
+chmod +x run_bifurcation_robust.sh
+
+5. run simulation 
+
+./run_bifurcation_robust.sh

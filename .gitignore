@@ -1,0 +1,27 @@
+
+# ignores (added by Ibrahim import)
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.msh
+*.msh.h5
+*.cas
+*.dat
+*.trn
+*.vtu
+*.vtp
+*.vtk
+*.stl
+*.cgns
+*.h5
+*.hdf5
+**/results/
+**/out/
+**/OUT/
+**/INFER_OUT/
+**/TRAIN_OUT/
+**/ProcessedData/
+**/*.pt
+**/*.npz
+

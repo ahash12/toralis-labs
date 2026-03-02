@@ -1,0 +1,55 @@
+/file/set-tui-version "25.2"
+; ===========================================================
+; make_base_setup.jou
+; Purpose:
+;   - Read mesh
+;   - Set laminar
+;   - Ensure water-liquid exists (via Fluent Database)
+;   - Assign water-liquid to fluid_domain
+;   - Write base_setup.cas.h5
+; Notes:
+;   This uses GUI/Scheme actions because that is what works
+;   in your Fluent build to pull "water-liquid" from database.
+; ===========================================================
+
+; Read mesh (your build supports /file/read-case for .msh)
+/file/read-case "MESH_FILE"
+
+; Set laminar (GUI-safe + consistent with your successful recording)
+(cx-use-window-id 51)
+(cx-gui-do cx-set-list-tree-selections "NavigationPane*Frame2*Table1*List_Tree2"
+  (list "Setup|Models|Viscous (SST k-omega)"))
+(cx-gui-do cx-set-toggle-button2 "Viscous Model*Table1*ToggleBox1(Model)*Laminar" #t)
+(cx-gui-do cx-activate-item "Viscous Model*PanelButtons*PushButton1(OK)")
+
+; --- Materials: import water-liquid from Fluent Database ---
+(cx-use-window-id 51)
+(cx-gui-do cx-set-list-tree-selections "NavigationPane*Frame2*Table1*List_Tree2"
+  (list "Setup|Materials|Fluid|air"))
+(cx-gui-do cx-list-tree-right-click "NavigationPane*Frame2*Table1*List_Tree2")
+(cx-gui-do cx-activate-item "MenuBar*PopupMenuTree-air*Edit...")
+(cx-gui-do cx-activate-item "Create/Edit Materials*Table1*Frame1*Frame2*ButtonBox2*PushButton1(Fluent Database)")
+
+; In the recorded journal, the database list index for water-liquid
+; was selected indirectly. Here we rely on Copy after selecting the item.
+; Many builds keep 'water-liquid' at a stable index, but if yours changes,
+; we’ll adjust this selection once and then it’s stable forever.
+; Try selecting index 574 (your recording) and copy it.
+(cx-gui-do cx-set-list-selections "Fluent Database Materials*Table1*Frame1*List1(Materials)" '( 574))
+(cx-gui-do cx-activate-item "Fluent Database Materials*PanelButtons*PushButton6(Copy)")
+(cx-gui-do cx-activate-item "Fluent Database Materials*PanelButtons*PushButton1(Close)")
+(cx-gui-do cx-activate-item "Create/Edit Materials*PanelButtons*PushButton1(Close)")
+
+; --- Assign water-liquid to fluid_domain ---
+(cx-use-window-id 51)
+(cx-gui-do cx-set-list-tree-selections "NavigationPane*Frame2*Table1*List_Tree2"
+  (list "Setup|Cell Zone Conditions|Fluid|fluid_domain (fluid, id=3115)"))
+(cx-gui-do cx-activate-item "Fluid*Frame2*Table1*Table1*PushButton2(Edit)")
+(cx-gui-do cx-set-list-selections "Fluid*Frame2*Table1*Table1*DropDownList1(Material Name)" '( 0))
+(cx-gui-do cx-enable-apply-button "Fluid")
+(cx-gui-do cx-activate-item "Fluid*PanelButtons*PushButton1(OK)")
+
+; Write base setup case
+/file/write-case "base_setup.cas.h5"
+
+/exit yes

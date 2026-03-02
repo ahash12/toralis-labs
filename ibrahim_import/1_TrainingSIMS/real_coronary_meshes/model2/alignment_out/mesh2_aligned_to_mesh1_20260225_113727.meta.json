@@ -1,0 +1,190 @@
+{
+  "created_utc": "2026-02-25T01:37:27Z",
+  "mesh1_path": "C:\\Users\\radie\\Desktop\\1_TrainingSIMS\\real_coronary_meshes\\model1\\coronary_extracted_vessel.msh",
+  "mesh2_path": "C:\\Users\\radie\\Desktop\\1_TrainingSIMS\\real_coronary_meshes\\model2\\coronary2.msh",
+  "int_mode": "hex",
+  "mesh1_zone_summary": [
+    {
+      "zone_id": 3117,
+      "bc_type": 2,
+      "bc_type_base": 2,
+      "bc_name": "interior",
+      "face_type": 0,
+      "n_faces": 1220320,
+      "header_line": 1524533
+    },
+    {
+      "zone_id": 19,
+      "bc_type": 3,
+      "bc_type_base": 3,
+      "bc_name": "wall",
+      "face_type": 3,
+      "n_faces": 57325,
+      "header_line": 302198
+    },
+    {
+      "zone_id": 21,
+      "bc_type": 5,
+      "bc_type_base": 5,
+      "bc_name": "pressure-outlet",
+      "face_type": 0,
+      "n_faces": 709,
+      "header_line": 303942
+    },
+    {
+      "zone_id": 22,
+      "bc_type": 5,
+      "bc_type_base": 5,
+      "bc_name": "pressure-outlet",
+      "face_type": 0,
+      "n_faces": 267,
+      "header_line": 304211
+    },
+    {
+      "zone_id": 20,
+      "bc_type": 10,
+      "bc_type_base": 10,
+      "bc_name": "velocity-inlet",
+      "face_type": 0,
+      "n_faces": 1031,
+      "header_line": 303231
+    }
+  ],
+  "mesh2_zone_summary": [
+    {
+      "zone_id": 2633,
+      "bc_type": 2,
+      "bc_type_base": 2,
+      "bc_name": "interior",
+      "face_type": 0,
+      "n_faces": 1481898,
+      "header_line": 1791900
+    },
+    {
+      "zone_id": 20,
+      "bc_type": 3,
+      "bc_type_base": 3,
+      "bc_name": "wall",
+      "face_type": 3,
+      "n_faces": 81602,
+      "header_line": 1873504
+    },
+    {
+      "zone_id": 18,
+      "bc_type": 5,
+      "bc_type_base": 5,
+      "bc_name": "pressure-outlet",
+      "face_type": 0,
+      "n_faces": 344,
+      "header_line": 1874096
+    },
+    {
+      "zone_id": 19,
+      "bc_type": 5,
+      "bc_type_base": 5,
+      "bc_name": "pressure-outlet",
+      "face_type": 0,
+      "n_faces": 244,
+      "header_line": 1873750
+    },
+    {
+      "zone_id": 17,
+      "bc_type": 10,
+      "bc_type_base": 10,
+      "bc_name": "velocity-inlet",
+      "face_type": 0,
+      "n_faces": 894,
+      "header_line": 1874992
+    }
+  ],
+  "mesh1_selected": {
+    "inlet_zone": 20,
+    "wall_zones": [
+      19
+    ]
+  },
+  "mesh2_selected": {
+    "inlet_zone": 17,
+    "wall_zones": [
+      20
+    ]
+  },
+  "transform": {
+    "R": [
+      [
+        0.28301791187934267,
+        -0.9159291829663699,
+        0.2845603509723787
+      ],
+      [
+        -0.21431383703117712,
+        0.22879619887243663,
+        0.949590374128745
+      ],
+      [
+        -0.9348638621809806,
+        -0.32973630551025773,
+        -0.13154287519942387
+      ]
+    ],
+    "t": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "det_R": 0.9999999999991025,
+    "translate_inlet_to_match": false
+  },
+  "diagnostics": {
+    "Cin1": [
+      0.14937562062296755,
+      0.16431804852276194,
+      -0.09374698159075523
+    ],
+    "Cwall1": [
+      0.131961856036213,
+      0.16675720758072415,
+      -0.12973858780361583
+    ],
+    "d1_target": [
+      -0.43472176527921624,
+      0.060891803503572275,
+      -0.8985038536693121
+    ],
+    "Cin2_before": [
+      0.18424109817930945,
+      0.2590857895988005,
+      -0.16754779148340962
+    ],
+    "Cwall2_before": [
+      0.22741779649014804,
+      0.30253733426952734,
+      -0.16433914385273346
+    ],
+    "d2_before": [
+      0.7038947805159929,
+      0.7083755056695551,
+      0.05230947265787098
+    ],
+    "Cin2_after": [
+      0.18424109815631384,
+      0.2590857889549232,
+      -0.16754779150640522
+    ],
+    "Cwall2_after": [
+      0.1575753932560982,
+      0.26282087484818656,
+      -0.22266175292641674
+    ],
+    "d2_after": [
+      -0.43472176521068984,
+      0.060891813616368036,
+      -0.8985038530171205
+    ],
+    "angle_deg_after": 0.0
+  },
+  "output_files": {
+    "full_nodes_csv": null,
+    "wall_nodes_csv": null
+  }
+}
