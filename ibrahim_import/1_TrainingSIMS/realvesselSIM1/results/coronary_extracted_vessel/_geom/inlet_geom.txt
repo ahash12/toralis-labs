@@ -1,0 +1,4 @@
+mesh=coronary_extracted_vessel.msh
+A_m2=8.8200818e-06
+Dh_m=0.0033511306950876883
+nu_m2s=1.004808655580044e-06

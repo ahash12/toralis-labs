@@ -1,0 +1,2579 @@
+
+Opening input/output transcript to file "C:\Users\radie\Desktop\1_TrainingSIMS\realvesselSIM2\\fluent-20260225-080910-28464.trn".
+Auto-Transcript Start Time:  08:09:10, 25 Feb 2026 E. Australia Standard Time 
+
+              Welcome to ANSYS Fluent 2025 R2.04
+
+              Copyright 1987-2025 ANSYS, Inc. All Rights Reserved.
+              Unauthorized use, distribution or duplication is prohibited.
+              This product is subject to U.S. laws governing export and re-export.
+              For full Legal Notice, see documentation.
+
+Build Time: Oct  7 2025 15:34:38 EDT  Build Id: 10205  
+ 
+Connected License Server List:	1055@localhost
+
+     --------------------------------------------------------------
+     This is an academic version of ANSYS FLUENT. Usage of this product
+     license is limited to the terms and conditions specified in your ANSYS
+     license form, additional terms section.
+     --------------------------------------------------------------
+Host spawning Node 0 on machine "DESKTOP-BBN4MI6" (win64).
+
+-----------------------------------------------------------------------------------
+ID    Hostname         Core  O.S.         PID    Vendor                           
+-----------------------------------------------------------------------------------
+n3    DESKTOP-BBN4MI6  4/12  Windows-x64  4940   Intel(R) Core(TM) i5-10400F      
+n2    DESKTOP-BBN4MI6  3/12  Windows-x64  29136  Intel(R) Core(TM) i5-10400F      
+n1    DESKTOP-BBN4MI6  2/12  Windows-x64  29404  Intel(R) Core(TM) i5-10400F      
+n0*   DESKTOP-BBN4MI6  1/12  Windows-x64  25148  Intel(R) Core(TM) i5-10400F      
+host  DESKTOP-BBN4MI6        Windows-x64  31568  Intel(R) Core(TM) i5-10400F      
+
+MPI Option Selected: intel
+Selected system interconnect: default
+-----------------------------------------------------------------------------------
+
+Cleanup script file is C:\\Users\\radie\\Desktop\\1_TrainingSIMS\\realvesselSIM2\\cleanup-fluent-DESKTOP-BBN4MI6-31568.bat
+
+Posting ANSYS Product Improvement Program startup data
+Done.
+
+Reading journal file results/coronary2/Re275/run_coronary2_Re275.jou...
+
+> ; ===========================================================
+; bifurcation_template_robust.jou  (BATCH-SAFE EXPORT FIX)
+; Validated for ANSYS Fluent 2025 R2 (25.2)
+; Mesh -> laminar -> water-liquid -> BCs -> iterate -> export
+; ===========================================================
+
+/file/set-tui-version "25.2"
+
+> /file/set-batch-options yes no yes
+
+> ; overwrite files? yes
+; hide questions?  no   (keep no because BC sections still use scripted responses)
+; exit on error?   yes
+
+define/                 parametric-study/       solve/
+display/                plot/                   surface/
+exit                    preferences/            switch-to-meshing-mode
+file/                   print-license-usage     turbo-setup/
+mesh/                   report/                 views/
+parallel/               server/
+
+> ; Prevent overwrite prompts during export/write
+/file/confirm-overwrite? no
+
+> 
+define/                 parametric-study/       solve/
+display/                plot/                   surface/
+exit                    preferences/            switch-to-meshing-mode
+file/                   print-license-usage     turbo-setup/
+mesh/                   report/                 views/
+parallel/               server/
+
+> /file/read-case "coronary2.msh"Multicore SMT processors detected. Processor affinity set!
+
+Reading "coronary2.msh"...
+
+Buffering for file scan...
+
+ANSYS(R) TGLib(TM) 3D, revision 24.1.0
+Warning: Skipping edges zones section(s).
+   35982 nodes.
+   41815 nodes.
+  178694 nodes.
+ 1481898 mixed interior faces, zone 2633.
+   81602 triangular wall faces, zone 20.
+     244 mixed pressure-outlet faces, zone 19.
+     344 mixed pressure-outlet faces, zone 18.
+     894 mixed velocity-inlet faces, zone 17.
+  700623 mixed cells, zone 2584.
+
+Building...
+     mesh
+	auto partitioning mesh by Metis (fast),
+	distributing mesh
+		parts....,
+		faces....,
+		nodes....,
+		cells....,
+        bandwidth reduction using Reverse Cuthill-McKee: 176553/1496 = 118.017
+     materials,
+     interface,
+     domains,
+     zones,
+	Skipping thread 13 of domain 1 (not referenced by grid).
+	Skipping thread 14 of domain 1 (not referenced by grid).
+	Skipping thread 15 of domain 1 (not referenced by grid).
+	Skipping thread 16 of domain 1 (not referenced by grid).
+	Skipping thread 10 of domain 1 (not referenced by grid).
+	interior--fluid_domain
+	wall-fluid_domain
+	outlet_2
+	outlet_1
+	inlet
+	fluid_domain
+     parallel,
+Done.
+
+
+> 
+adjoint/                parallel/               server/
+define/                 parametric-study/       solve/
+display/                plot/                   surface/
+exit                    preferences/            turbo-setup/
+file/                   print-license-usage     views/
+mesh/                   report/
+
+> ; ---------- Models ----------
+/define/models/solver/pressure-based yes
+
+> /define/models/viscous/laminar yes
+
+> 
+adjoint/                parallel/               server/
+define/                 parametric-study/       solve/
+display/                plot/                   surface/
+exit                    preferences/            turbo-setup/
+file/                   print-license-usage     views/
+mesh/                   report/
+
+> ; ---------- Materials ----------
+/define/materials/copy fluid water-liquid
+
+Material "water-liquid" copied from database: fluent-database.
+
+
+> /define/boundary-conditions/fluid (fluid_domain)
+fluid_domain yes water-liquid
+Specify source terms? [no] no
+Specify fixed values? [no] no
+Frame Motion? [no] no
+Use Profile for Reference Frame X-Origin of Rotation-Axis? [no] no
+Reference Frame X-Origin of Rotation-Axis (constant or expression) (in [m]) [0] 0
+Use Profile for Reference Frame Y-Origin of Rotation-Axis? [no] no
+Reference Frame Y-Origin of Rotation-Axis (constant or expression) (in [m]) [0] 0
+Use Profile for Reference Frame Z-Origin of Rotation-Axis? [no] no
+Reference Frame Z-Origin of Rotation-Axis (constant or expression) (in [m]) [0] 0
+Use Profile for Reference Frame X-Component of Rotation-Axis? [no] no
+Reference Frame X-Component of Rotation-Axis (constant or expression) [0] 0
+Use Profile for Reference Frame Y-Component of Rotation-Axis? [no] no
+Reference Frame Y-Component of Rotation-Axis (constant or expression) [0] 0
+Use Profile for Reference Frame Z-Component of Rotation-Axis? [no] no
+Reference Frame Z-Component of Rotation-Axis (constant or expression) [1] 1
+Mesh Motion? [no] no
+Enter yes or no to continue [no] no
+Porous zone? [no] no
+3D Fan Zone? [no] no
+
+> 
+adjoint/                parallel/               server/
+define/                 parametric-study/       solve/
+display/                plot/                   surface/
+exit                    preferences/            turbo-setup/
+file/                   print-license-usage     views/
+mesh/                   report/
+
+> ; ---------- Boundary Conditions ----------
+; INLET
+/define/boundary-conditions/velocity-inlet (inlet)
+inlet
+Velocity Specification Method: Magnitude and Direction [no] no
+Velocity Specification Method: Components [no] no
+Velocity Specification Method: Magnitude, Normal to Boundary [yes] yes
+Reference Frame: Absolute [yes] yes
+Use Profile for Velocity Magnitude? [no] no
+Velocity Magnitude (constant or expression) (in [m/s]) [0] 0.0643437701777482
+Use Profile for Supersonic/Initial Gauge Pressure? [no] no
+Supersonic/Initial Gauge Pressure (constant or expression) (in [Pa]) [0] 0
+
+> 
+adjoint/                parallel/               server/
+define/                 parametric-study/       solve/
+display/                plot/                   surface/
+exit                    preferences/            turbo-setup/
+file/                   print-license-usage     views/
+mesh/                   report/
+
+> ; OUTLETS
+/define/boundary-conditions/pressure-outlet (outlet_1 outlet_2)
+outlet_1
+Backflow Reference Frame: Absolute [yes] yes
+Use Profile for Gauge Pressure? [no] no
+Gauge Pressure (constant or expression) (in [Pa]) [0] 0
+Backflow Direction Specification Method: Direction Vector [no] no
+Backflow Direction Specification Method: Normal to Boundary [yes] yes
+Backflow Pressure Specification: Total Pressure [yes] yes
+Radial Equilibrium Pressure Distribution [no] no
+Average Pressure Specification? [no] no
+Specify targeted mass flow rate [no] no
+
+> 
+adjoint/                parallel/               server/
+define/                 parametric-study/       solve/
+display/                plot/                   surface/
+exit                    preferences/            turbo-setup/
+file/                   print-license-usage     views/
+mesh/                   report/
+
+> /define/boundary-conditions/pressure-outlet (outlet_1 outlet_2)
+outlet_2
+Backflow Reference Frame: Absolute [yes] yes
+Use Profile for Gauge Pressure? [no] no
+Gauge Pressure (constant or expression) (in [Pa]) [0] 0
+Backflow Direction Specification Method: Direction Vector [no] no
+Backflow Direction Specification Method: Normal to Boundary [yes] yes
+Backflow Pressure Specification: Total Pressure [yes] yes
+Radial Equilibrium Pressure Distribution [no] no
+Average Pressure Specification? [no] no
+Specify targeted mass flow rate [no] no
+
+> 
+adjoint/                parallel/               server/
+define/                 parametric-study/       solve/
+display/                plot/                   surface/
+exit                    preferences/            turbo-setup/
+file/                   print-license-usage     views/
+mesh/                   report/
+
+> ; WALLS
+/define/boundary-conditions/wall (wall-fluid_domain)
+wall-fluid_domain
+Wall Motion [motion-bc-stationary]: Change current value? [no] no
+Shear Boundary Condition [shear-bc-noslip]: Change current value? [no] no
+
+> 
+adjoint/                parallel/               server/
+define/                 parametric-study/       solve/
+display/                plot/                   surface/
+exit                    preferences/            turbo-setup/
+file/                   print-license-usage     views/
+mesh/                   report/
+
+> ; ---------- Solution Methods ----------
+/solve/set/p-v-coupling 24
+
+> /solve/set/discretization-scheme/pressure 12
+
+> /solve/set/discretization-scheme/mom 4
+
+> 
+adjoint/                parallel/               server/
+define/                 parametric-study/       solve/
+display/                plot/                   surface/
+exit                    preferences/            turbo-setup/
+file/                   print-license-usage     views/
+mesh/                   report/
+
+> ; ---------- Solution Controls ----------
+/solve/monitors/residual/convergence-criteria 1e-6 1e-5 1e-5 1e-5
+
+> /solve/monitors/residual/print? yes
+
+> 
+adjoint/                parallel/               server/
+define/                 parametric-study/       solve/
+display/                plot/                   surface/
+exit                    preferences/            turbo-setup/
+file/                   print-license-usage     views/
+mesh/                   report/
+
+> ; ---------- Initialization ----------
+/solve/initialize/compute-defaults/velocity-inlet (inlet)
+inlet
+
+> /solve/initialize/initialize-flow
+
+> 
+adjoint/                parallel/               server/
+define/                 parametric-study/       solve/
+display/                plot/                   surface/
+exit                    preferences/            turbo-setup/
+file/                   print-license-usage     views/
+mesh/                   report/
+
+> ; ---------- Solve ----------
+/solve/iterate 3500
+
+  iter  continuity  x-velocity  y-velocity  z-velocity     time/iter
+
+ Reversed flow on 244 faces (100.0% area) of pressure-outlet 19.
+     1  1.0000e+00  5.4142e-03  7.6500e-03  7.5072e-03  1:53:20 3499
+
+ Reversed flow on 84 faces (24.5% area) of pressure-outlet 19.
+
+ Reversed flow on 170 faces (43.8% area) of pressure-outlet 18.
+     2  7.6671e-01  9.9860e-03  1.5140e-02  1.6152e-02  1:49:45 3498
+
+ Reversed flow on 154 faces (61.4% area) of pressure-outlet 19.
+
+ Reversed flow on 162 faces (38.2% area) of pressure-outlet 18.
+     3  3.4116e-01  4.1439e-03  5.7419e-03  5.0169e-03  1:47:00 3497
+
+ Reversed flow on 50 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 115 faces (24.4% area) of pressure-outlet 18.
+     4  2.0441e-01  2.3108e-03  2.9606e-03  2.1797e-03  1:49:52 3496
+
+ Reversed flow on 27 faces (7.6% area) of pressure-outlet 19.
+
+ Reversed flow on 102 faces (17.0% area) of pressure-outlet 18.
+     5  1.6006e-01  1.6120e-03  1.7898e-03  1.1855e-03  1:57:37 3495
+
+ Reversed flow on 4 faces (1.1% area) of pressure-outlet 19.
+
+ Reversed flow on 103 faces (15.3% area) of pressure-outlet 18.
+     6  1.4621e-01  1.4541e-03  1.3612e-03  8.7316e-04  1:53:26 3494
+
+ Reversed flow on 3 faces (0.7% area) of pressure-outlet 19.
+
+ Reversed flow on 155 faces (23.7% area) of pressure-outlet 18.
+     7  1.1946e-01  1.1044e-03  9.8374e-04  5.8004e-04  1:56:46 3493
+
+ Reversed flow on 1 face (0.1% area) of pressure-outlet 19.
+
+ Reversed flow on 166 faces (27.2% area) of pressure-outlet 18.
+     8  1.0564e-01  1.0269e-03  8.4862e-04  5.1822e-04  2:01:35 3492
+
+ Reversed flow on 186 faces (32.1% area) of pressure-outlet 18.
+     9  9.4781e-02  9.3168e-04  7.3331e-04  4.5881e-04  2:02:51 3491
+
+ Reversed flow on 192 faces (33.1% area) of pressure-outlet 18.
+    10  8.5911e-02  8.4660e-04  6.5368e-04  4.1959e-04  2:07:16 3490
+
+ Reversed flow on 201 faces (34.2% area) of pressure-outlet 18.
+    11  8.1048e-02  7.9648e-04  6.1022e-04  4.0228e-04  2:09:21 3489
+
+ Reversed flow on 208 faces (35.8% area) of pressure-outlet 18.
+
+  iter  continuity  x-velocity  y-velocity  z-velocity     time/iter
+    12  7.8603e-02  7.6558e-04  5.8380e-04  3.9495e-04  2:11:02 3488
+
+ Reversed flow on 209 faces (36.5% area) of pressure-outlet 18.
+    13  7.3413e-02  6.9436e-04  5.3715e-04  3.5831e-04  2:04:43 3487
+
+ Reversed flow on 204 faces (36.7% area) of pressure-outlet 18.
+    14  6.6421e-02  6.2029e-04  4.8702e-04  3.2145e-04  2:05:52 3486
+
+ Reversed flow on 197 faces (36.5% area) of pressure-outlet 18.
+    15  6.2520e-02  5.8129e-04  4.6391e-04  3.0700e-04  2:08:40 3485
+
+ Reversed flow on 201 faces (36.5% area) of pressure-outlet 18.
+    16  5.9468e-02  5.3751e-04  4.3890e-04  2.8735e-04  2:55:39 3484
+
+ Reversed flow on 5 faces (2.6% area) of pressure-outlet 19.
+
+ Reversed flow on 203 faces (36.9% area) of pressure-outlet 18.
+    17  5.4586e-02  4.8321e-04  4.0110e-04  2.5944e-04  2:51:04 3483
+
+ Reversed flow on 4 faces (2.2% area) of pressure-outlet 19.
+
+ Reversed flow on 187 faces (34.9% area) of pressure-outlet 18.
+    18  5.3197e-02  4.7132e-04  3.9275e-04  2.6084e-04  2:36:38 3482
+
+ Reversed flow on 16 faces (8.0% area) of pressure-outlet 19.
+
+ Reversed flow on 204 faces (36.4% area) of pressure-outlet 18.
+    19  4.8895e-02  4.1923e-04  3.5571e-04  2.3155e-04  2:25:38 3481
+
+ Reversed flow on 17 faces (10.3% area) of pressure-outlet 19.
+
+ Reversed flow on 199 faces (36.1% area) of pressure-outlet 18.
+    20  4.5132e-02  3.8411e-04  3.2897e-04  2.1512e-04  2:22:04 3480
+
+ Reversed flow on 19 faces (11.2% area) of pressure-outlet 19.
+
+ Reversed flow on 201 faces (36.6% area) of pressure-outlet 18.
+    21  4.3162e-02  3.6340e-04  3.1568e-04  2.0639e-04  2:18:02 3479
+
+ Reversed flow on 20 faces (11.5% area) of pressure-outlet 19.
+
+ Reversed flow on 203 faces (37.2% area) of pressure-outlet 18.
+    22  4.1640e-02  3.4302e-04  3.0099e-04  1.9680e-04  2:09:23 3478
+
+ Reversed flow on 23 faces (13.0% area) of pressure-outlet 19.
+
+ Reversed flow on 204 faces (37.1% area) of pressure-outlet 18.
+
+  iter  continuity  x-velocity  y-velocity  z-velocity     time/iter
+    23  3.8565e-02  3.1133e-04  2.7521e-04  1.7882e-04  2:02:52 3477
+
+ Reversed flow on 26 faces (14.2% area) of pressure-outlet 19.
+
+ Reversed flow on 203 faces (37.7% area) of pressure-outlet 18.
+    24  3.5498e-02  2.8534e-04  2.5253e-04  1.6540e-04  2:02:20 3476
+
+ Reversed flow on 30 faces (16.1% area) of pressure-outlet 19.
+
+ Reversed flow on 204 faces (38.0% area) of pressure-outlet 18.
+    25  3.3994e-02  2.7343e-04  2.4081e-04  1.6048e-04  2:02:00 3475
+
+ Reversed flow on 32 faces (16.7% area) of pressure-outlet 19.
+
+ Reversed flow on 205 faces (38.5% area) of pressure-outlet 18.
+    26  3.2597e-02  2.5845e-04  2.2742e-04  1.5258e-04  2:01:48 3474
+
+ Reversed flow on 32 faces (16.7% area) of pressure-outlet 19.
+
+ Reversed flow on 198 faces (37.8% area) of pressure-outlet 18.
+    27  3.1248e-02  2.4229e-04  2.1350e-04  1.4451e-04  1:58:45 3473
+
+ Reversed flow on 32 faces (16.7% area) of pressure-outlet 19.
+
+ Reversed flow on 200 faces (38.0% area) of pressure-outlet 18.
+    28  2.8861e-02  2.1918e-04  1.9300e-04  1.3104e-04  1:57:39 3472
+
+ Reversed flow on 32 faces (16.7% area) of pressure-outlet 19.
+
+ Reversed flow on 193 faces (37.4% area) of pressure-outlet 18.
+    29  2.6832e-02  2.0177e-04  1.7718e-04  1.2206e-04  2:00:17 3471
+
+ Reversed flow on 33 faces (16.8% area) of pressure-outlet 19.
+
+ Reversed flow on 195 faces (37.8% area) of pressure-outlet 18.
+    30  2.5437e-02  1.9072e-04  1.6728e-04  1.1659e-04  2:01:44 3470
+
+ Reversed flow on 33 faces (16.8% area) of pressure-outlet 19.
+
+ Reversed flow on 192 faces (37.6% area) of pressure-outlet 18.
+    31  2.4607e-02  1.8318e-04  1.6019e-04  1.1338e-04  1:56:43 3469
+
+ Reversed flow on 36 faces (17.9% area) of pressure-outlet 19.
+
+ Reversed flow on 195 faces (37.8% area) of pressure-outlet 18.
+    32  2.2706e-02  1.6396e-04  1.4375e-04  1.0172e-04  1:58:08 3468
+
+ Reversed flow on 38 faces (18.2% area) of pressure-outlet 19.
+
+ Reversed flow on 189 faces (37.5% area) of pressure-outlet 18.
+    33  2.1575e-02  1.5613e-04  1.3627e-04  9.8235e-05  1:53:24 3467
+
+ Reversed flow on 40 faces (18.5% area) of pressure-outlet 19.
+
+ Reversed flow on 196 faces (38.1% area) of pressure-outlet 18.
+
+  iter  continuity  x-velocity  y-velocity  z-velocity     time/iter
+    34  1.9811e-02  1.4026e-04  1.2350e-04  8.8284e-05  1:55:20 3466
+
+ Reversed flow on 40 faces (18.5% area) of pressure-outlet 19.
+
+ Reversed flow on 183 faces (36.8% area) of pressure-outlet 18.
+    35  1.8770e-02  1.3389e-04  1.1772e-04  8.4908e-05  1:57:17 3465
+
+ Reversed flow on 40 faces (18.5% area) of pressure-outlet 19.
+
+ Reversed flow on 187 faces (37.0% area) of pressure-outlet 18.
+    36  1.8060e-02  1.2686e-04  1.1193e-04  8.0759e-05  1:53:43 3464
+
+ Reversed flow on 41 faces (18.8% area) of pressure-outlet 19.
+
+ Reversed flow on 191 faces (37.7% area) of pressure-outlet 18.
+    37  1.6565e-02  1.1362e-04  1.0094e-04  7.2560e-05  1:55:25 3463
+
+ Reversed flow on 41 faces (18.8% area) of pressure-outlet 19.
+
+ Reversed flow on 188 faces (37.6% area) of pressure-outlet 18.
+    38  1.5742e-02  1.0887e-04  9.6590e-05  6.9901e-05  1:57:06 3462
+
+ Reversed flow on 41 faces (18.8% area) of pressure-outlet 19.
+
+ Reversed flow on 190 faces (37.8% area) of pressure-outlet 18.
+    39  1.4834e-02  1.0165e-04  8.9816e-05  6.5494e-05  1:57:56 3461
+
+ Reversed flow on 41 faces (18.8% area) of pressure-outlet 19.
+
+ Reversed flow on 187 faces (37.8% area) of pressure-outlet 18.
+    40  1.3981e-02  9.5060e-05  8.3582e-05  6.1855e-05  1:58:32 3460
+
+ Reversed flow on 41 faces (18.8% area) of pressure-outlet 19.
+
+ Reversed flow on 192 faces (38.2% area) of pressure-outlet 18.
+    41  1.3191e-02  8.9352e-05  7.8488e-05  5.8731e-05  1:58:56 3459
+
+ Reversed flow on 41 faces (18.8% area) of pressure-outlet 19.
+
+ Reversed flow on 193 faces (38.2% area) of pressure-outlet 18.
+    42  1.2489e-02  8.4385e-05  7.3587e-05  5.5453e-05  1:59:17 3458
+
+ Reversed flow on 41 faces (18.8% area) of pressure-outlet 19.
+
+ Reversed flow on 189 faces (38.0% area) of pressure-outlet 18.
+    43  1.2094e-02  8.1744e-05  7.0597e-05  5.3852e-05  1:54:08 3457
+
+ Reversed flow on 41 faces (18.8% area) of pressure-outlet 19.
+
+ Reversed flow on 194 faces (38.5% area) of pressure-outlet 18.
+    44  1.1177e-02  7.3057e-05  6.3307e-05  4.7953e-05  1:55:28 3456
+
+ Reversed flow on 41 faces (18.8% area) of pressure-outlet 19.
+
+ Reversed flow on 188 faces (38.0% area) of pressure-outlet 18.
+
+  iter  continuity  x-velocity  y-velocity  z-velocity     time/iter
+    45  1.0804e-02  7.2771e-05  6.2444e-05  4.7915e-05  1:51:01 3455
+
+ Reversed flow on 41 faces (18.8% area) of pressure-outlet 19.
+
+ Reversed flow on 189 faces (38.1% area) of pressure-outlet 18.
+    46  9.9916e-03  6.5316e-05  5.6489e-05  4.2822e-05  1:47:24 3454
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 185 faces (37.8% area) of pressure-outlet 18.
+    47  9.2896e-03  6.0786e-05  5.2813e-05  4.0010e-05  1:45:07 3453
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 185 faces (37.8% area) of pressure-outlet 18.
+    48  8.6789e-03  5.6784e-05  4.9826e-05  3.7370e-05  1:49:33 3452
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 183 faces (37.6% area) of pressure-outlet 18.
+    49  8.3213e-03  5.5276e-05  4.8209e-05  3.6619e-05  1:48:06 3451
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 187 faces (37.8% area) of pressure-outlet 18.
+    50  7.7885e-03  5.0713e-05  4.4331e-05  3.3550e-05  1:51:50 3450
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 182 faces (37.4% area) of pressure-outlet 18.
+    51  7.1934e-03  4.6734e-05  4.0821e-05  3.1215e-05  2:03:41 3449
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 183 faces (37.5% area) of pressure-outlet 18.
+    52  6.8344e-03  4.5029e-05  3.9165e-05  3.0225e-05  2:11:22 3448
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 185 faces (37.6% area) of pressure-outlet 18.
+    53  6.5824e-03  4.3548e-05  3.7667e-05  2.9083e-05  2:10:59 3447
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 188 faces (37.7% area) of pressure-outlet 18.
+    54  6.1403e-03  3.9895e-05  3.4458e-05  2.6622e-05  2:17:56 3446
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 190 faces (37.9% area) of pressure-outlet 18.
+    55  5.8160e-03  3.8251e-05  3.2998e-05  2.5562e-05  2:23:10 3445
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 187 faces (37.7% area) of pressure-outlet 18.
+
+  iter  continuity  x-velocity  y-velocity  z-velocity     time/iter
+    56  5.6751e-03  3.7583e-05  3.2206e-05  2.4878e-05  2:20:24 3444
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 186 faces (37.7% area) of pressure-outlet 18.
+    57  5.2670e-03  3.4140e-05  2.9264e-05  2.2482e-05  2:18:04 3443
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 183 faces (37.4% area) of pressure-outlet 18.
+    58  4.9067e-03  3.1891e-05  2.7283e-05  2.1155e-05  2:26:00 3442
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 182 faces (37.4% area) of pressure-outlet 18.
+    59  4.7716e-03  3.1537e-05  2.6724e-05  2.0952e-05  2:25:42 3441
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 186 faces (37.7% area) of pressure-outlet 18.
+    60  4.4571e-03  2.8695e-05  2.4428e-05  1.8943e-05  2:23:45 3440
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 182 faces (37.4% area) of pressure-outlet 18.
+    61  4.1520e-03  2.6885e-05  2.2878e-05  1.7849e-05  2:22:39 3439
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 183 faces (37.5% area) of pressure-outlet 18.
+    62  3.8733e-03  2.5079e-05  2.1376e-05  1.6699e-05  2:30:17 3438
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 182 faces (37.4% area) of pressure-outlet 18.
+    63  3.7041e-03  2.4288e-05  2.0668e-05  1.6187e-05  2:39:38 3437
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 181 faces (37.1% area) of pressure-outlet 18.
+    64  3.5315e-03  2.3171e-05  1.9659e-05  1.5425e-05  2:42:30 3436
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 183 faces (37.3% area) of pressure-outlet 18.
+    65  3.3693e-03  2.2081e-05  1.8639e-05  1.4705e-05  2:45:01 3435
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 183 faces (37.3% area) of pressure-outlet 18.
+    66  3.2283e-03  2.1158e-05  1.7797e-05  1.4082e-05  2:46:56 3434
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 184 faces (37.4% area) of pressure-outlet 18.
+
+  iter  continuity  x-velocity  y-velocity  z-velocity     time/iter
+    67  3.0922e-03  2.0198e-05  1.6896e-05  1.3418e-05  2:42:53 3433
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 184 faces (37.4% area) of pressure-outlet 18.
+    68  2.8848e-03  1.8656e-05  1.5561e-05  1.2327e-05  2:45:25 3432
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 182 faces (37.2% area) of pressure-outlet 18.
+    69  2.7889e-03  1.8441e-05  1.5277e-05  1.2221e-05  2:47:26 3431
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 185 faces (37.5% area) of pressure-outlet 18.
+    70  2.6516e-03  1.7264e-05  1.4265e-05  1.1414e-05  2:41:28 3430
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 184 faces (37.4% area) of pressure-outlet 18.
+    71  2.4699e-03  1.5964e-05  1.3243e-05  1.0534e-05  2:44:11 3429
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 183 faces (37.3% area) of pressure-outlet 18.
+    72  2.3594e-03  1.5497e-05  1.2804e-05  1.0282e-05  2:46:48 3428
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 183 faces (37.3% area) of pressure-outlet 18.
+    73  2.2762e-03  1.4862e-05  1.2295e-05  9.9020e-06  2:51:42 3427
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 183 faces (37.3% area) of pressure-outlet 18.
+    74  2.1601e-03  1.4054e-05  1.1674e-05  9.3260e-06  2:55:34 3426
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 182 faces (37.2% area) of pressure-outlet 18.
+    75  2.0672e-03  1.3525e-05  1.1229e-05  8.9337e-06  2:49:07 3425
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 183 faces (37.3% area) of pressure-outlet 18.
+    76  1.9410e-03  1.2595e-05  1.0484e-05  8.3037e-06  2:52:33 3424
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.8% area) of pressure-outlet 18.
+    77  1.8579e-03  1.2260e-05  1.0177e-05  8.1174e-06  2:53:19 3423
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 182 faces (37.0% area) of pressure-outlet 18.
+
+  iter  continuity  x-velocity  y-velocity  z-velocity     time/iter
+    78  1.7907e-03  1.1758e-05  9.7714e-06  7.8020e-06  2:46:00 3422
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 184 faces (37.2% area) of pressure-outlet 18.
+    79  1.6738e-03  1.0832e-05  9.0513e-06  7.1363e-06  2:46:58 3421
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 182 faces (36.9% area) of pressure-outlet 18.
+    80  1.6336e-03  1.0757e-05  9.0176e-06  7.1319e-06  2:41:54 3420
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 184 faces (37.0% area) of pressure-outlet 18.
+    81  1.5251e-03  9.8145e-06  8.2575e-06  6.5138e-06  2:52:08 3419
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 182 faces (36.8% area) of pressure-outlet 18.
+    82  1.5047e-03  1.0102e-05  8.3966e-06  6.7635e-06  2:46:37 3418
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 183 faces (36.9% area) of pressure-outlet 18.
+    83  1.4091e-03  9.1005e-06  7.5713e-06  6.0342e-06  2:39:22 3417
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 182 faces (36.8% area) of pressure-outlet 18.
+    84  1.3077e-03  8.5113e-06  7.1202e-06  5.6710e-06  2:33:47 3416
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 182 faces (36.8% area) of pressure-outlet 18.
+    85  1.2109e-03  7.9146e-06  6.6755e-06  5.2902e-06  2:36:34 3415
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 182 faces (36.8% area) of pressure-outlet 18.
+    86  1.1849e-03  8.0101e-06  6.6979e-06  5.3606e-06  2:33:14 3414
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 183 faces (36.9% area) of pressure-outlet 18.
+    87  1.1106e-03  7.2850e-06  6.1200e-06  4.8514e-06  2:30:18 3413
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 183 faces (36.9% area) of pressure-outlet 18.
+    88  1.0336e-03  6.8228e-06  5.7671e-06  4.5738e-06  2:26:43 3412
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 183 faces (36.9% area) of pressure-outlet 18.
+
+  iter  continuity  x-velocity  y-velocity  z-velocity     time/iter
+    89  9.6256e-04  6.3749e-06  5.4311e-06  4.2822e-06  2:30:03 3411
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 182 faces (36.8% area) of pressure-outlet 18.
+    90  9.2380e-04  6.2288e-06  5.3075e-06  4.1644e-06  2:25:10 3410
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 182 faces (36.8% area) of pressure-outlet 18.
+    91  8.7127e-04  5.8059e-06  4.9680e-06  3.8775e-06  2:31:39 3409
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 181 faces (36.7% area) of pressure-outlet 18.
+    92  8.3178e-04  5.6133e-06  4.7891e-06  3.7606e-06  2:34:14 3408
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 181 faces (36.7% area) of pressure-outlet 18.
+    93  7.9514e-04  5.3653e-06  4.5760e-06  3.6108e-06  2:29:43 3407
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 181 faces (36.7% area) of pressure-outlet 18.
+    94  7.4267e-04  4.9604e-06  4.2213e-06  3.3199e-06  2:31:51 3406
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.6% area) of pressure-outlet 18.
+    95  7.0846e-04  4.7911e-06  4.0696e-06  3.2141e-06  2:36:44 3405
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 179 faces (36.5% area) of pressure-outlet 18.
+    96  6.7904e-04  4.5685e-06  3.8911e-06  3.0597e-06  2:33:05 3404
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 179 faces (36.5% area) of pressure-outlet 18.
+    97  6.3419e-04  4.2437e-06  3.6243e-06  2.8314e-06  2:38:04 3403
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 179 faces (36.5% area) of pressure-outlet 18.
+    98  6.0491e-04  4.1028e-06  3.4978e-06  2.7384e-06  2:42:18 3402
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+    99  5.8312e-04  3.9239e-06  3.3426e-06  2.6347e-06  2:36:50 3401
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+
+  iter  continuity  x-velocity  y-velocity  z-velocity     time/iter
+   100  5.4363e-04  3.6054e-06  3.0918e-06  2.4109e-06  2:39:59 3400
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   101  5.1880e-04  3.4994e-06  3.0041e-06  2.3418e-06  2:42:59 3399
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   102  4.9420e-04  3.3162e-06  2.8394e-06  2.2192e-06  2:48:01 3398
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   103  4.7083e-04  3.1396e-06  2.6922e-06  2.1080e-06  2:49:25 3397
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   104  4.4848e-04  3.0051e-06  2.5710e-06  2.0165e-06  2:51:24 3396
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   105  4.3048e-04  2.8794e-06  2.4644e-06  1.9273e-06  2:52:04 3395
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   106  4.1271e-04  2.7368e-06  2.3368e-06  1.8434e-06  2:52:17 3394
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   107  4.0023e-04  2.6804e-06  2.2626e-06  1.7979e-06  2:44:31 3393
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   108  3.7855e-04  2.4898e-06  2.1148e-06  1.6520e-06  2:39:51 3392
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   109  3.5562e-04  2.3427e-06  1.9945e-06  1.5558e-06  2:34:12 3391
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   110  3.3797e-04  2.2329e-06  1.8967e-06  1.4850e-06  2:36:17 3390
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+
+  iter  continuity  x-velocity  y-velocity  z-velocity     time/iter
+   111  3.2080e-04  2.1243e-06  1.7978e-06  1.4082e-06  2:30:51 3389
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   112  3.0350e-04  2.0228e-06  1.7069e-06  1.3401e-06  2:34:11 3388
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   113  2.9669e-04  2.0232e-06  1.6911e-06  1.3501e-06  2:28:59 3387
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   114  2.7769e-04  1.8460e-06  1.5454e-06  1.2248e-06  2:24:57 3386
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   115  2.6265e-04  1.7765e-06  1.4800e-06  1.1814e-06  2:21:54 3385
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   116  2.4796e-04  1.6886e-06  1.4044e-06  1.1160e-06  2:20:13 3384
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   117  2.3552e-04  1.6094e-06  1.3370e-06  1.0643e-06  2:26:35 3383
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   118  2.2912e-04  1.5818e-06  1.3137e-06  1.0491e-06  2:25:34 3382
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   119  2.1872e-04  1.4938e-06  1.2426e-06  9.8997e-07  2:21:55 3381
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   120  2.0785e-04  1.4225e-06  1.1798e-06  9.4507e-07  2:29:26 3380
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   121  2.0674e-04  1.4635e-06  1.1948e-06  9.8375e-07  2:26:58 3379
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+
+  iter  continuity  x-velocity  y-velocity  z-velocity     time/iter
+   122  1.9935e-04  1.3559e-06  1.1029e-06  9.0606e-07  2:25:17 3378
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   123  1.8772e-04  1.2824e-06  1.0432e-06  8.5496e-07  2:22:33 3377
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   124  1.7743e-04  1.2223e-06  9.9545e-07  8.1817e-07  2:20:57 3376
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   125  1.6972e-04  1.1786e-06  9.5738e-07  7.9108e-07  2:18:57 3375
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   126  1.6182e-04  1.1253e-06  9.1589e-07  7.5584e-07  2:17:46 3374
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   127  1.5426e-04  1.0787e-06  8.7725e-07  7.2451e-07  2:17:11 3373
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   128  1.4727e-04  1.0318e-06  8.3943e-07  6.9651e-07  2:16:56 3372
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   129  1.4032e-04  9.8353e-07  8.0068e-07  6.6362e-07  2:17:20 3371
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   130  1.3416e-04  9.4440e-07  7.7058e-07  6.3786e-07  2:16:58 3370
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   131  1.2869e-04  9.0776e-07  7.4116e-07  6.1455e-07  2:16:27 3369
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   132  1.2345e-04  8.6855e-07  7.1211e-07  5.9208e-07  2:16:01 3368
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+
+  iter  continuity  x-velocity  y-velocity  z-velocity     time/iter
+   133  1.1853e-04  8.3373e-07  6.8616e-07  5.6909e-07  2:16:23 3367
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   134  1.1406e-04  8.0372e-07  6.6317e-07  5.5009e-07  2:26:22 3366
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   135  1.1327e-04  8.0848e-07  6.6627e-07  5.5630e-07  2:24:57 3365
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   136  1.0844e-04  7.5157e-07  6.2293e-07  5.1713e-07  2:21:16 3364
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   137  1.0320e-04  7.1783e-07  5.9551e-07  4.9464e-07  2:13:02 3363
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   138  9.8288e-05  6.8661e-07  5.6938e-07  4.7456e-07  2:10:55 3362
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   139  9.3501e-05  6.5504e-07  5.4445e-07  4.5540e-07  2:03:42 3361
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   140  8.9118e-05  6.2624e-07  5.2062e-07  4.3647e-07  1:58:13 3360
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   141  8.4993e-05  5.9772e-07  4.9974e-07  4.1865e-07  1:53:16 3359
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   142  8.1125e-05  5.7074e-07  4.7885e-07  4.0103e-07  1:48:35 3358
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   143  7.7626e-05  5.4542e-07  4.5863e-07  3.8427e-07  1:45:15 3357
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+
+  iter  continuity  x-velocity  y-velocity  z-velocity     time/iter
+   144  7.4345e-05  5.2167e-07  4.3949e-07  3.6732e-07  1:42:15 3356
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   145  7.1189e-05  4.9903e-07  4.2160e-07  3.5124e-07  1:39:48 3355
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   146  6.8202e-05  4.7682e-07  4.0441e-07  3.3576e-07  1:37:49 3354
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   147  6.5339e-05  4.5555e-07  3.8729e-07  3.2018e-07  1:36:13 3353
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   148  6.2613e-05  4.3571e-07  3.7170e-07  3.0552e-07  1:34:56 3352
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   149  5.9986e-05  4.1745e-07  3.5694e-07  2.9176e-07  1:34:09 3351
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   150  5.7536e-05  3.9983e-07  3.4286e-07  2.7896e-07  1:33:17 3350
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   151  5.5237e-05  3.8339e-07  3.2926e-07  2.6629e-07  1:32:34 3349
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   152  5.3055e-05  3.6797e-07  3.1701e-07  2.5468e-07  1:31:58 3348
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   153  5.0950e-05  3.5332e-07  3.0534e-07  2.4385e-07  1:31:30 3347
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   154  4.8982e-05  3.3944e-07  2.9404e-07  2.3371e-07  1:36:04 3346
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+
+  iter  continuity  x-velocity  y-velocity  z-velocity     time/iter
+   155  4.8100e-05  3.3684e-07  2.9092e-07  2.3075e-07  1:34:47 3345
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   156  4.6263e-05  3.1882e-07  2.7673e-07  2.1712e-07  1:33:47 3344
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   157  4.4408e-05  3.0718e-07  2.6667e-07  2.0846e-07  1:33:02 3343
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   158  4.2711e-05  2.9597e-07  2.5710e-07  2.0007e-07  1:32:19 3342
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   159  4.1163e-05  2.8591e-07  2.4852e-07  1.9226e-07  1:31:46 3341
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   160  3.9718e-05  2.7635e-07  2.4063e-07  1.8564e-07  1:31:18 3340
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   161  3.8345e-05  2.6728e-07  2.3326e-07  1.7916e-07  1:31:01 3339
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   162  3.7051e-05  2.5931e-07  2.2614e-07  1.7303e-07  1:30:39 3338
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   163  3.5852e-05  2.5169e-07  2.1942e-07  1.6734e-07  1:30:23 3337
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   164  3.4705e-05  2.4422e-07  2.1273e-07  1.6180e-07  1:30:41 3336
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   165  3.3621e-05  2.3720e-07  2.0647e-07  1.5663e-07  1:33:10 3335
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+
+  iter  continuity  x-velocity  y-velocity  z-velocity     time/iter
+   166  3.2595e-05  2.3074e-07  2.0077e-07  1.5184e-07  1:33:23 3334
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   167  3.1650e-05  2.2450e-07  1.9556e-07  1.4732e-07  1:34:27 3333
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   168  3.0756e-05  2.1825e-07  1.9088e-07  1.4295e-07  1:34:34 3332
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   169  2.9964e-05  2.1263e-07  1.8686e-07  1.3910e-07  1:34:43 3331
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   170  2.9264e-05  2.0752e-07  1.8346e-07  1.3573e-07  1:34:39 3330
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   171  2.8649e-05  2.0249e-07  1.8029e-07  1.3241e-07  1:34:57 3329
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   172  2.8049e-05  1.9749e-07  1.7653e-07  1.2944e-07  1:34:41 3328
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   173  2.7502e-05  1.9332e-07  1.7269e-07  1.2678e-07  1:34:34 3327
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   174  2.6907e-05  1.8938e-07  1.6856e-07  1.2405e-07  1:35:06 3326
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   175  2.6239e-05  1.8490e-07  1.6423e-07  1.2103e-07  1:34:58 3325
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   176  2.5558e-05  1.8056e-07  1.6029e-07  1.1822e-07  1:35:08 3324
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+
+  iter  continuity  x-velocity  y-velocity  z-velocity     time/iter
+   177  2.4888e-05  1.7662e-07  1.5664e-07  1.1568e-07  1:35:14 3323
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   178  2.4191e-05  1.7237e-07  1.5273e-07  1.1303e-07  1:35:15 3322
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   179  2.3443e-05  1.6775e-07  1.4826e-07  1.1021e-07  1:34:59 3321
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   180  2.2717e-05  1.6330e-07  1.4387e-07  1.0755e-07  1:35:09 3320
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   181  2.2004e-05  1.5902e-07  1.3954e-07  1.0492e-07  1:34:52 3319
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   182  2.1272e-05  1.5436e-07  1.3480e-07  1.0200e-07  1:34:28 3318
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   183  2.0547e-05  1.4967e-07  1.3023e-07  9.9013e-08  1:34:21 3317
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   184  1.9834e-05  1.4526e-07  1.2590e-07  9.6149e-08  1:34:10 3316
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   185  1.9152e-05  1.4125e-07  1.2172e-07  9.3318e-08  1:34:03 3315
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   186  1.8481e-05  1.3713e-07  1.1753e-07  9.0224e-08  1:33:50 3314
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   187  1.7808e-05  1.3288e-07  1.1338e-07  8.7120e-08  1:33:45 3313
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+
+  iter  continuity  x-velocity  y-velocity  z-velocity     time/iter
+   188  1.7187e-05  1.2912e-07  1.0960e-07  8.4382e-08  1:33:48 3312
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   189  1.6616e-05  1.2529e-07  1.0590e-07  8.1642e-08  1:33:53 3311
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   190  1.6055e-05  1.2111e-07  1.0215e-07  7.8751e-08  1:33:58 3310
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   191  1.5475e-05  1.1693e-07  9.8340e-08  7.6008e-08  1:34:20 3309
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   192  1.4930e-05  1.1315e-07  9.4889e-08  7.3576e-08  1:34:25 3308
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   193  1.4423e-05  1.0928e-07  9.1732e-08  7.1198e-08  1:35:14 3307
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   194  1.3935e-05  1.0540e-07  8.8643e-08  6.8736e-08  1:35:16 3306
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   195  1.3456e-05  1.0188e-07  8.5702e-08  6.6445e-08  1:35:09 3305
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   196  1.3005e-05  9.8627e-08  8.2994e-08  6.4395e-08  1:35:08 3304
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   197  1.2581e-05  9.5357e-08  8.0387e-08  6.2342e-08  1:35:17 3303
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   198  1.2166e-05  9.2061e-08  7.7758e-08  6.0318e-08  1:35:14 3302
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+
+  iter  continuity  x-velocity  y-velocity  z-velocity     time/iter
+   199  1.1761e-05  8.8936e-08  7.5205e-08  5.8443e-08  1:34:53 3301
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   200  1.1377e-05  8.6021e-08  7.2785e-08  5.6675e-08  1:34:17 3300
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   201  1.1004e-05  8.3055e-08  7.0335e-08  5.4843e-08  1:35:47 3299
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   202  1.0628e-05  8.0042e-08  6.7832e-08  5.2980e-08  1:35:55 3298
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   203  1.0261e-05  7.7304e-08  6.5497e-08  5.1239e-08  1:36:49 3297
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   204  9.9131e-06  7.4720e-08  6.3310e-08  4.9363e-08  1:35:42 3296
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   205  9.6008e-06  7.2314e-08  6.1361e-08  4.7619e-08  1:34:24 3295
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   206  9.2949e-06  6.9933e-08  5.9390e-08  4.5911e-08  1:33:26 3294
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   207  8.9998e-06  6.7723e-08  5.7570e-08  4.4331e-08  1:34:50 3293
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   208  8.7202e-06  6.5588e-08  5.5852e-08  4.2823e-08  1:35:20 3292
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   209  8.4556e-06  6.3447e-08  5.4162e-08  4.1396e-08  1:34:49 3291
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+
+  iter  continuity  x-velocity  y-velocity  z-velocity     time/iter
+   210  8.2078e-06  6.1467e-08  5.2599e-08  4.0071e-08  1:34:54 3290
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   211  7.9822e-06  5.9683e-08  5.1219e-08  3.8884e-08  1:34:34 3289
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   212  7.7806e-06  5.8009e-08  4.9938e-08  3.7799e-08  1:34:16 3288
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   213  7.5843e-06  5.6377e-08  4.8727e-08  3.6749e-08  1:33:59 3287
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   214  7.4102e-06  5.4881e-08  4.7643e-08  3.5781e-08  1:34:05 3286
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   215  7.2580e-06  5.3547e-08  4.6713e-08  3.4934e-08  1:34:07 3285
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   216  7.1222e-06  5.2303e-08  4.5752e-08  3.4173e-08  1:35:24 3284
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   217  6.9895e-06  5.1133e-08  4.4840e-08  3.3440e-08  1:36:38 3283
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   218  6.8572e-06  5.0070e-08  4.4009e-08  3.2761e-08  1:38:46 3282
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   219  6.7276e-06  4.9063e-08  4.3228e-08  3.2106e-08  1:40:51 3281
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   220  6.6029e-06  4.8126e-08  4.2495e-08  3.1484e-08  1:39:43 3280
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+
+  iter  continuity  x-velocity  y-velocity  z-velocity     time/iter
+   221  6.4831e-06  4.7286e-08  4.1801e-08  3.0924e-08  1:39:29 3279
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   222  6.3695e-06  4.6504e-08  4.1132e-08  3.0411e-08  1:40:40 3278
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   223  6.2608e-06  4.5755e-08  4.0472e-08  2.9921e-08  1:39:29 3277
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   224  6.1613e-06  4.5084e-08  3.9845e-08  2.9472e-08  1:39:04 3276
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   225  6.0674e-06  4.4464e-08  3.9257e-08  2.9076e-08  1:38:47 3275
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   226  5.9785e-06  4.3877e-08  3.8684e-08  2.8696e-08  1:39:47 3274
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   227  5.8936e-06  4.3321e-08  3.8131e-08  2.8327e-08  1:37:44 3273
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   228  5.8137e-06  4.2823e-08  3.7607e-08  2.8002e-08  1:36:20 3272
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   229  5.7392e-06  4.2347e-08  3.7096e-08  2.7702e-08  1:35:07 3271
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   230  5.6668e-06  4.1868e-08  3.6591e-08  2.7394e-08  1:34:04 3270
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   231  5.5954e-06  4.1412e-08  3.6113e-08  2.7091e-08  1:33:10 3269
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+
+  iter  continuity  x-velocity  y-velocity  z-velocity     time/iter
+   232  5.5266e-06  4.0982e-08  3.5654e-08  2.6812e-08  1:32:13 3268
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   233  5.4611e-06  4.0559e-08  3.5211e-08  2.6535e-08  1:31:59 3267
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   234  5.3971e-06  4.0139e-08  3.4776e-08  2.6248e-08  1:31:27 3266
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   235  5.3347e-06  3.9748e-08  3.4362e-08  2.5970e-08  1:31:22 3265
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   236  5.2744e-06  3.9368e-08  3.3963e-08  2.5705e-08  1:30:57 3264
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   237  5.2161e-06  3.8984e-08  3.3567e-08  2.5438e-08  1:30:58 3263
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   238  5.1595e-06  3.8609e-08  3.3185e-08  2.5171e-08  1:30:58 3262
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   239  5.1047e-06  3.8247e-08  3.2818e-08  2.4917e-08  1:30:36 3261
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   240  5.0517e-06  3.7892e-08  3.2457e-08  2.4666e-08  1:30:19 3260
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   241  5.0006e-06  3.7515e-08  3.2086e-08  2.4399e-08  1:30:21 3259
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   242  4.9153e-06  3.7169e-08  3.1591e-08  2.4149e-08  1:30:53 3258
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+
+  iter  continuity  x-velocity  y-velocity  z-velocity     time/iter
+   243  4.8226e-06  3.6819e-08  3.1022e-08  2.3893e-08  1:30:48 3257
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   244  4.7499e-06  3.6441e-08  3.0494e-08  2.3609e-08  1:30:45 3256
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   245  4.6785e-06  3.6048e-08  2.9995e-08  2.3313e-08  1:30:48 3255
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   246  4.6106e-06  3.5658e-08  2.9524e-08  2.3020e-08  1:31:12 3254
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   247  4.5471e-06  3.5276e-08  2.9080e-08  2.2741e-08  1:31:54 3253
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   248  4.4827e-06  3.4887e-08  2.8662e-08  2.2471e-08  1:32:00 3252
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   249  4.4183e-06  3.4496e-08  2.8270e-08  2.2206e-08  1:31:35 3251
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   250  4.3543e-06  3.4119e-08  2.7899e-08  2.1956e-08  1:31:42 3250
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   251  4.2917e-06  3.3746e-08  2.7542e-08  2.1717e-08  1:31:23 3249
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   252  4.2306e-06  3.3373e-08  2.7195e-08  2.1483e-08  1:31:20 3248
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   253  4.1707e-06  3.3005e-08  2.6857e-08  2.1253e-08  1:31:03 3247
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+
+  iter  continuity  x-velocity  y-velocity  z-velocity     time/iter
+   254  4.1131e-06  3.2650e-08  2.6532e-08  2.1034e-08  1:30:53 3246
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   255  4.0576e-06  3.2298e-08  2.6215e-08  2.0821e-08  1:30:47 3245
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   256  4.0037e-06  3.1950e-08  2.5904e-08  2.0609e-08  1:30:45 3244
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   257  3.9511e-06  3.1610e-08  2.5602e-08  2.0401e-08  1:30:36 3243
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   258  3.9001e-06  3.1281e-08  2.5312e-08  2.0200e-08  1:30:39 3242
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   259  3.8506e-06  3.0956e-08  2.5030e-08  2.0003e-08  1:30:35 3241
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   260  3.8022e-06  3.0635e-08  2.4754e-08  1.9806e-08  1:30:33 3240
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   261  3.7553e-06  3.0322e-08  2.4488e-08  1.9614e-08  1:30:29 3239
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   262  3.7101e-06  3.0017e-08  2.4229e-08  1.9428e-08  1:30:39 3238
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   263  3.6662e-06  2.9714e-08  2.3976e-08  1.9243e-08  1:30:42 3237
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   264  3.6233e-06  2.9418e-08  2.3714e-08  1.9060e-08  1:30:48 3236
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+
+  iter  continuity  x-velocity  y-velocity  z-velocity     time/iter
+   265  3.5814e-06  2.9128e-08  2.3400e-08  1.8884e-08  1:30:52 3235
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   266  3.5382e-06  2.8828e-08  2.3083e-08  1.8717e-08  1:31:05 3234
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   267  3.4944e-06  2.8520e-08  2.2776e-08  1.8542e-08  1:31:17 3233
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   268  3.4517e-06  2.8207e-08  2.2485e-08  1.8357e-08  1:35:50 3232
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   269  3.4104e-06  2.7899e-08  2.2213e-08  1.8167e-08  1:35:01 3231
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   270  3.3703e-06  2.7600e-08  2.1950e-08  1.7975e-08  1:34:06 3230
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   271  3.3309e-06  2.7306e-08  2.1694e-08  1.7781e-08  1:33:29 3229
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   272  3.2928e-06  2.7019e-08  2.1444e-08  1.7590e-08  1:32:58 3228
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   273  3.2562e-06  2.6739e-08  2.1202e-08  1.7405e-08  1:33:31 3227
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   274  3.2210e-06  2.6467e-08  2.0968e-08  1.7224e-08  1:32:54 3226
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   275  3.1870e-06  2.6203e-08  2.0743e-08  1.7048e-08  1:32:33 3225
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+
+  iter  continuity  x-velocity  y-velocity  z-velocity     time/iter
+   276  3.1544e-06  2.5953e-08  2.0528e-08  1.6878e-08  1:32:12 3224
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   277  3.1235e-06  2.5714e-08  2.0324e-08  1.6714e-08  1:32:04 3223
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   278  3.0939e-06  2.5485e-08  2.0129e-08  1.6554e-08  1:32:05 3222
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   279  3.0655e-06  2.5268e-08  1.9945e-08  1.6399e-08  1:32:54 3221
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   280  3.0385e-06  2.5065e-08  1.9772e-08  1.6251e-08  1:33:20 3220
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   281  3.0130e-06  2.4873e-08  1.9608e-08  1.6110e-08  1:33:33 3219
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   282  2.9887e-06  2.4689e-08  1.9453e-08  1.5974e-08  1:33:53 3218
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   283  2.9657e-06  2.4515e-08  1.9306e-08  1.5842e-08  1:33:30 3217
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   284  2.9440e-06  2.4350e-08  1.9165e-08  1.5716e-08  1:32:30 3216
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   285  2.9238e-06  2.4194e-08  1.9032e-08  1.5595e-08  1:31:38 3215
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   286  2.9047e-06  2.4047e-08  1.8905e-08  1.5479e-08  1:31:24 3214
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+
+  iter  continuity  x-velocity  y-velocity  z-velocity     time/iter
+   287  2.8870e-06  2.3909e-08  1.8784e-08  1.5369e-08  1:31:34 3213
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   288  2.8706e-06  2.3780e-08  1.8669e-08  1.5264e-08  1:30:55 3212
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   289  2.8552e-06  2.3658e-08  1.8559e-08  1.5163e-08  1:30:21 3211
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   290  2.8410e-06  2.3545e-08  1.8453e-08  1.5066e-08  1:29:54 3210
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   291  2.8282e-06  2.3441e-08  1.8352e-08  1.4974e-08  1:29:13 3209
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   292  2.8166e-06  2.3347e-08  1.8257e-08  1.4886e-08  1:28:50 3208
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   293  2.8059e-06  2.3260e-08  1.8167e-08  1.4803e-08  1:28:36 3207
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   294  2.7962e-06  2.3182e-08  1.8082e-08  1.4723e-08  1:28:25 3206
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   295  2.7877e-06  2.3113e-08  1.8003e-08  1.4649e-08  1:28:31 3205
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   296  2.7804e-06  2.3052e-08  1.7928e-08  1.4577e-08  1:28:39 3204
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   297  2.7745e-06  2.3002e-08  1.7860e-08  1.4509e-08  1:28:27 3203
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+
+  iter  continuity  x-velocity  y-velocity  z-velocity     time/iter
+   298  2.7692e-06  2.2964e-08  1.7795e-08  1.4446e-08  1:28:29 3202
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   299  2.7647e-06  2.2941e-08  1.7735e-08  1.4388e-08  1:28:29 3201
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   300  2.7609e-06  2.2924e-08  1.7678e-08  1.4332e-08  1:28:05 3200
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   301  2.7578e-06  2.2915e-08  1.7625e-08  1.4282e-08  1:28:02 3199
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   302  2.7554e-06  2.2914e-08  1.7577e-08  1.4238e-08  1:28:12 3198
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   303  2.7319e-06  2.2472e-08  1.7524e-08  1.4192e-08  1:28:19 3197
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   304  2.6943e-06  2.2026e-08  1.7357e-08  1.4081e-08  1:28:39 3196
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   305  2.6528e-06  2.1572e-08  1.7133e-08  1.3928e-08  1:28:31 3195
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   306  2.6096e-06  2.1115e-08  1.6906e-08  1.3742e-08  1:28:39 3194
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   307  2.5661e-06  2.0682e-08  1.6673e-08  1.3523e-08  1:28:32 3193
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   308  2.5171e-06  2.0259e-08  1.6412e-08  1.3283e-08  1:28:04 3192
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+
+  iter  continuity  x-velocity  y-velocity  z-velocity     time/iter
+   309  2.4651e-06  1.9823e-08  1.6129e-08  1.3031e-08  1:27:51 3191
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   310  2.4134e-06  1.9387e-08  1.5834e-08  1.2765e-08  1:28:04 3190
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   311  2.3613e-06  1.8966e-08  1.5545e-08  1.2494e-08  1:28:01 3189
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   312  2.3103e-06  1.8556e-08  1.5263e-08  1.2226e-08  1:27:59 3188
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   313  2.2627e-06  1.8162e-08  1.4988e-08  1.1959e-08  1:29:31 3187
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   314  2.2178e-06  1.7786e-08  1.4717e-08  1.1701e-08  1:29:30 3186
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   315  2.1743e-06  1.7427e-08  1.4455e-08  1.1453e-08  1:29:23 3185
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   316  2.1319e-06  1.7083e-08  1.4199e-08  1.1216e-08  1:29:00 3184
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   317  2.0905e-06  1.6754e-08  1.3949e-08  1.0989e-08  1:28:59 3183
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   318  2.0505e-06  1.6442e-08  1.3709e-08  1.0774e-08  1:28:42 3182
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   319  2.0124e-06  1.6140e-08  1.3477e-08  1.0573e-08  1:28:41 3181
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+
+  iter  continuity  x-velocity  y-velocity  z-velocity     time/iter
+   320  1.9761e-06  1.5851e-08  1.3251e-08  1.0386e-08  1:28:41 3180
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   321  1.9415e-06  1.5576e-08  1.3032e-08  1.0209e-08  1:28:23 3179
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   322  1.9086e-06  1.5312e-08  1.2821e-08  1.0042e-08  1:28:21 3178
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   323  1.8770e-06  1.5060e-08  1.2617e-08  9.8817e-09  1:28:18 3177
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   324  1.8466e-06  1.4818e-08  1.2421e-08  9.7282e-09  1:28:42 3176
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   325  1.8174e-06  1.4586e-08  1.2233e-08  9.5815e-09  1:28:25 3175
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   326  1.7897e-06  1.4364e-08  1.2053e-08  9.4411e-09  1:28:03 3174
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   327  1.7631e-06  1.4151e-08  1.1880e-08  9.3069e-09  1:27:42 3173
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   328  1.7377e-06  1.3946e-08  1.1714e-08  9.1784e-09  1:27:42 3172
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   329  1.7134e-06  1.3748e-08  1.1555e-08  9.0548e-09  1:27:40 3171
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   330  1.6901e-06  1.3556e-08  1.1402e-08  8.9360e-09  1:27:37 3170
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+
+  iter  continuity  x-velocity  y-velocity  z-velocity     time/iter
+   331  1.6678e-06  1.3370e-08  1.1253e-08  8.8223e-09  1:27:45 3169
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   332  1.6464e-06  1.3190e-08  1.1110e-08  8.7128e-09  1:27:48 3168
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   333  1.6258e-06  1.3014e-08  1.0972e-08  8.6064e-09  1:27:42 3167
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   334  1.6060e-06  1.2844e-08  1.0839e-08  8.5030e-09  1:27:50 3166
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   335  1.5870e-06  1.2678e-08  1.0710e-08  8.4026e-09  1:27:47 3165
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   336  1.5685e-06  1.2517e-08  1.0586e-08  8.3051e-09  1:27:40 3164
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   337  1.5507e-06  1.2360e-08  1.0466e-08  8.2102e-09  1:27:27 3163
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   338  1.5335e-06  1.2207e-08  1.0350e-08  8.1177e-09  1:27:19 3162
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   339  1.5168e-06  1.2058e-08  1.0236e-08  8.0274e-09  1:27:16 3161
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   340  1.5007e-06  1.1913e-08  1.0126e-08  7.9393e-09  1:27:23 3160
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   341  1.4852e-06  1.1771e-08  1.0019e-08  7.8534e-09  1:27:15 3159
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+
+  iter  continuity  x-velocity  y-velocity  z-velocity     time/iter
+   342  1.4702e-06  1.1633e-08  9.9142e-09  7.7695e-09  1:27:23 3158
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   343  1.4557e-06  1.1498e-08  9.8123e-09  7.6876e-09  1:27:26 3157
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   344  1.4417e-06  1.1366e-08  9.7129e-09  7.6077e-09  1:27:20 3156
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   345  1.4281e-06  1.1237e-08  9.6168e-09  7.5297e-09  1:27:16 3155
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   346  1.4149e-06  1.1111e-08  9.5232e-09  7.4535e-09  1:27:04 3154
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   347  1.4020e-06  1.0988e-08  9.4320e-09  7.3790e-09  1:26:51 3153
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   348  1.3896e-06  1.0867e-08  9.3432e-09  7.3062e-09  1:27:04 3152
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   349  1.3776e-06  1.0749e-08  9.2568e-09  7.2349e-09  1:26:53 3151
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   350  1.3660e-06  1.0633e-08  9.1727e-09  7.1652e-09  1:28:39 3150
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   351  1.3547e-06  1.0520e-08  9.0906e-09  7.0969e-09  1:28:24 3149
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   352  1.3437e-06  1.0410e-08  9.0106e-09  7.0301e-09  1:27:51 3148
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+
+  iter  continuity  x-velocity  y-velocity  z-velocity     time/iter
+   353  1.3331e-06  1.0302e-08  8.9324e-09  6.9648e-09  1:27:29 3147
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   354  1.3228e-06  1.0196e-08  8.8562e-09  6.9002e-09  1:27:13 3146
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   355  1.3128e-06  1.0092e-08  8.7818e-09  6.8364e-09  1:26:47 3145
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   356  1.3031e-06  9.9899e-09  8.7092e-09  6.7739e-09  1:26:36 3144
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   357  1.2937e-06  9.8897e-09  8.6384e-09  6.7129e-09  1:26:23 3143
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   358  1.2846e-06  9.7916e-09  8.5693e-09  6.6534e-09  1:26:21 3142
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   359  1.2760e-06  9.6954e-09  8.5020e-09  6.5954e-09  1:26:22 3141
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   360  1.2676e-06  9.6012e-09  8.4363e-09  6.5388e-09  1:26:13 3140
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   361  1.2596e-06  9.5088e-09  8.3725e-09  6.4836e-09  1:25:49 3139
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   362  1.2519e-06  9.4185e-09  8.3104e-09  6.4296e-09  1:25:48 3138
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   363  1.2444e-06  9.3300e-09  8.2500e-09  6.3770e-09  1:25:45 3137
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+
+  iter  continuity  x-velocity  y-velocity  z-velocity     time/iter
+   364  1.2372e-06  9.2433e-09  8.1913e-09  6.3254e-09  1:25:53 3136
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   365  1.2302e-06  9.1584e-09  8.1341e-09  6.2750e-09  1:25:51 3135
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   366  1.2235e-06  9.0752e-09  8.0784e-09  6.2256e-09  1:25:36 3134
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   367  1.2170e-06  8.9940e-09  8.0241e-09  6.1771e-09  1:25:19 3133
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   368  1.2106e-06  8.9151e-09  7.9714e-09  6.1295e-09  1:25:13 3132
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   369  1.2045e-06  8.8385e-09  7.9168e-09  6.0838e-09  1:25:07 3131
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   370  1.1987e-06  8.7634e-09  7.8559e-09  6.0441e-09  1:25:04 3130
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   371  1.1931e-06  8.6907e-09  7.7929e-09  6.0065e-09  1:25:03 3129
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   372  1.1879e-06  8.6195e-09  7.7330e-09  5.9706e-09  1:24:46 3128
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   373  1.1830e-06  8.5501e-09  7.6781e-09  5.9358e-09  1:24:35 3127
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   374  1.1785e-06  8.4825e-09  7.6245e-09  5.9028e-09  1:25:04 3126
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+
+  iter  continuity  x-velocity  y-velocity  z-velocity     time/iter
+   375  1.1744e-06  8.4163e-09  7.5745e-09  5.8710e-09  1:25:07 3125
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   376  1.1705e-06  8.3517e-09  7.5280e-09  5.8402e-09  1:25:05 3124
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   377  1.1669e-06  8.2889e-09  7.4851e-09  5.8104e-09  1:25:40 3123
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   378  1.1635e-06  8.2256e-09  7.4419e-09  5.7792e-09  1:25:38 3122
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   379  1.1602e-06  8.1637e-09  7.4024e-09  5.7486e-09  1:25:40 3121
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   380  1.1572e-06  8.1033e-09  7.3687e-09  5.7196e-09  1:25:21 3120
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   381  1.1548e-06  8.0449e-09  7.3388e-09  5.6921e-09  1:25:04 3119
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   382  1.1526e-06  7.9882e-09  7.3120e-09  5.6658e-09  1:25:10 3118
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   383  1.1509e-06  7.9332e-09  7.2872e-09  5.6409e-09  1:26:49 3117
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   384  1.1494e-06  7.8799e-09  7.2653e-09  5.6168e-09  1:27:48 3116
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   385  1.1482e-06  7.8287e-09  7.2448e-09  5.5933e-09  1:28:34 3115
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+
+  iter  continuity  x-velocity  y-velocity  z-velocity     time/iter
+   386  1.1472e-06  7.7791e-09  7.2254e-09  5.5703e-09  1:29:21 3114
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   387  1.1464e-06  7.7309e-09  7.2070e-09  5.5476e-09  1:29:28 3113
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   388  1.1456e-06  7.6838e-09  7.1891e-09  5.5251e-09  1:32:32 3112
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   389  1.1449e-06  7.6376e-09  7.1716e-09  5.5026e-09  1:34:40 3111
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   390  1.1441e-06  7.5920e-09  7.1539e-09  5.4797e-09  1:34:10 3110
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   391  1.1433e-06  7.5472e-09  7.1360e-09  5.4564e-09  1:33:16 3109
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   392  1.1424e-06  7.5029e-09  7.1181e-09  5.4324e-09  1:32:47 3108
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   393  1.1414e-06  7.4589e-09  7.0999e-09  5.4075e-09  1:32:14 3107
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   394  1.1402e-06  7.4149e-09  7.0812e-09  5.3821e-09  1:30:32 3106
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   395  1.1389e-06  7.3708e-09  7.0617e-09  5.3560e-09  1:29:04 3105
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   396  1.1374e-06  7.3267e-09  7.0415e-09  5.3291e-09  1:27:52 3104
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+
+  iter  continuity  x-velocity  y-velocity  z-velocity     time/iter
+   397  1.1358e-06  7.2826e-09  7.0207e-09  5.3016e-09  1:26:54 3103
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   398  1.1341e-06  7.2385e-09  7.0003e-09  5.2736e-09  1:26:10 3102
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   399  1.1321e-06  7.1942e-09  6.9794e-09  5.2449e-09  1:25:34 3101
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   400  1.1300e-06  7.1498e-09  6.9576e-09  5.2155e-09  1:25:01 3100
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   401  1.1277e-06  7.1051e-09  6.9350e-09  5.1850e-09  1:24:33 3099
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   402  1.1251e-06  7.0600e-09  6.9118e-09  5.1535e-09  1:25:03 3098
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   403  1.1222e-06  7.0149e-09  6.8881e-09  5.1206e-09  1:25:20 3097
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   404  1.1190e-06  6.9688e-09  6.8632e-09  5.0861e-09  1:25:15 3096
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   405  1.1153e-06  6.9216e-09  6.8359e-09  5.0500e-09  1:25:11 3095
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   406  1.1110e-06  6.8732e-09  6.8068e-09  5.0119e-09  1:26:34 3094
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   407  1.1060e-06  6.8231e-09  6.7746e-09  4.9716e-09  1:26:10 3093
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+
+  iter  continuity  x-velocity  y-velocity  z-velocity     time/iter
+   408  1.0999e-06  6.7721e-09  6.7395e-09  4.9396e-09  1:25:32 3092
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   409  1.0944e-06  6.7210e-09  6.7026e-09  4.9063e-09  1:25:35 3091
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   410  1.0893e-06  6.6694e-09  6.6639e-09  4.8702e-09  1:25:39 3090
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   411  1.0833e-06  6.6164e-09  6.6222e-09  4.8296e-09  1:25:30 3089
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   412  1.0760e-06  6.5614e-09  6.5770e-09  4.7781e-09  1:25:22 3088
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   413  1.0676e-06  6.5032e-09  6.5243e-09  4.7229e-09  1:25:28 3087
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   414  1.0581e-06  6.4422e-09  6.4652e-09  4.6671e-09  1:25:38 3086
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   415  1.0476e-06  6.3785e-09  6.4072e-09  4.6102e-09  1:25:39 3085
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   416  1.0358e-06  6.3121e-09  6.3444e-09  4.5499e-09  1:25:34 3084
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   417  1.0230e-06  6.2426e-09  6.2760e-09  4.4869e-09  1:25:32 3083
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+   418  1.0093e-06  6.1703e-09  6.2014e-09  4.4218e-09  1:25:13 3082
+
+ Reversed flow on 42 faces (19.4% area) of pressure-outlet 19.
+
+ Reversed flow on 180 faces (36.9% area) of pressure-outlet 18.
+
+  iter  continuity  x-velocity  y-velocity  z-velocity     time/iter
+   419  9.9486e-07  6.0955e-09  6.1210e-09  4.3551e-09  1:24:46 3081
+!  419 solution is converged
+
+> 
+adjoint/                parallel/               server/
+define/                 parametric-study/       solve/
+display/                plot/                   surface/
+exit                    preferences/            turbo-setup/
+file/                   print-license-usage     views/
+mesh/                   report/
+
+> ; ===========================================================
+; DATA EXPORT
+; ===========================================================
+
+adjoint/                parallel/               server/
+define/                 parametric-study/       solve/
+display/                plot/                   surface/
+exit                    preferences/            turbo-setup/
+file/                   print-license-usage     views/
+mesh/                   report/
+
+> /surface/zone-surface interior-data fluid_domain
+
+> 
+adjoint/                parallel/               server/
+define/                 parametric-study/       solve/
+display/                plot/                   surface/
+exit                    preferences/            turbo-setup/
+file/                   print-license-usage     views/
+mesh/                   report/
+
+> ; Save case and data
+/file/write-case-data "results/coronary2/Re275/bifurcation_Re275.cas.h5"Fast-loading "C:\PROGRA~1\ANSYSI~1\v252\fluent\fluent25.2.0\\addons\afd\lib\hdfio.bin"
+Done.
+
+Writing to DESKTOP-BBN4MI6:"C:\Users\radie\Desktop\1_TrainingSIMS\realvesselSIM2\results/coronary2/Re275/bifurcation_Re275.cas.h5" in NODE0 mode and compression level 1 ...
+Grouping cells for Laplace smoothing ...
+      700623 cells,     1 zone  ...
+     1564982 faces,     5 zones ...
+      256491 nodes,     1 zone  ...
+  Done.
+Done.
+
+Writing to DESKTOP-BBN4MI6:"C:\Users\radie\Desktop\1_TrainingSIMS\realvesselSIM2\results/coronary2/Re275/bifurcation_Re275.dat.h5" in NODE0 mode and compression level 1 ...
+  Writing results.
+Done.
+
+
+> 
+adjoint/                parallel/               server/
+define/                 parametric-study/       solve/
+display/                plot/                   surface/
+exit                    preferences/            turbo-setup/
+file/                   print-license-usage     views/
+mesh/                   report/
+
+> ; Export interior field data
+/file/export/ascii "results/coronary2/Re275/interior_full_Re275.csv" interior-data () no x-coordinate y-coordinate z-coordinate pressure x-velocity y-velocity z-velocity velocity-magnitude ()
+
+Location/Cell-Centered?,
+if Cell-Centered not chosen, node values of scalars are reported [no] ; Respond to the single prompt:
+; Location/Cell-Centered? [no]
+no
+
+Writing "results/coronary2/Re275/interior_full_Re275.csv"...
+
+Writing information to ascii file ...
+Done.
+
+
+> 
+adjoint/                parallel/               server/
+define/                 parametric-study/       solve/
+display/                plot/                   surface/
+exit                    preferences/            turbo-setup/
+file/                   print-license-usage     views/
+mesh/                   report/
+
+> ; Export wall data
+/file/export/ascii "results/coronary2/Re275/wall_data_Re275.csv" wall-fluid_domain () no x-coordinate y-coordinate z-coordinate pressure wall-shear x-wall-shear y-wall-shear z-wall-shear ()
+
+Location/Cell-Centered?,
+if Cell-Centered not chosen, node values of scalars are reported [no] ; Location/Cell-Centered? [no]
+no
+
+Writing "results/coronary2/Re275/wall_data_Re275.csv"...
+
+Writing information to ascii file ...
+Done.
+
+
+> 
+adjoint/                parallel/               server/
+define/                 parametric-study/       solve/
+display/                plot/                   surface/
+exit                    preferences/            turbo-setup/
+file/                   print-license-usage     views/
+mesh/                   report/
+
+> ; Export outlet data
+/file/export/ascii "results/coronary2/Re275/outlets_Re275.csv" outlet_1 outlet_2 () no x-coordinate y-coordinate z-coordinate pressure velocity-magnitude ()
+
+Location/Cell-Centered?,
+if Cell-Centered not chosen, node values of scalars are reported [no] ; Location/Cell-Centered? [no]
+no
+
+Writing "results/coronary2/Re275/outlets_Re275.csv"...
+
+Writing information to ascii file ...
+Done.
+
+
+> 
+adjoint/                parallel/               server/
+define/                 parametric-study/       solve/
+display/                plot/                   surface/
+exit                    preferences/            turbo-setup/
+file/                   print-license-usage     views/
+mesh/                   report/
+
+> /exit 
+Posting ANSYS Product Improvement Program performance data 
+Done.
+Auto-Transcript Stop Time:  08:23:32, 25 Feb 2026 E. Australia Standard Time 
+Total Transcript Time: 14 Minute 22 Second.
+
+Automatic transcript closed.

@@ -1,0 +1,165 @@
+{
+  "created_utc": "2026-02-25T21:06:03Z",
+  "msh": "C:\\Users\\radie\\Desktop\\1_TrainingSIMS\\real_coronary_meshes\\model2\\coronary2_aligned.msh",
+  "msh_sha1": "9a53c7f7baca6c9a6be93153aa0cc5e776805d78",
+  "ckpt": "C:\\Users\\radie\\Desktop\\2_trainingprocess\\TRAIN_OUT\\best_model.pt",
+  "ckpt_keys_present": [
+    "append_re_to_x",
+    "best_epoch",
+    "best_val_mse_norm",
+    "created_utc",
+    "dropout",
+    "excluded",
+    "feature_version",
+    "files_all",
+    "files_kept",
+    "hidden_dim",
+    "in_dim",
+    "model_state",
+    "normalize_y",
+    "num_layers",
+    "out_dim",
+    "pipeline_version",
+    "re_mu",
+    "re_sd",
+    "split",
+    "target_version",
+    "train_cfg",
+    "y_mu",
+    "y_sd"
+  ],
+  "device": "cpu",
+  "int_mode": "hex",
+  "wall_mode": "auto",
+  "wall_zone_ids": [
+    20
+  ],
+  "wall_auto_min_faces_frac": 0.0,
+  "scan_header": {
+    "msh_path": "C:\\Users\\radie\\Desktop\\1_TrainingSIMS\\real_coronary_meshes\\model2\\coronary2_aligned.msh",
+    "int_mode": "hex",
+    "scaling_factor": 1.0,
+    "node_decl": {
+      "first": 1,
+      "last": 256491
+    },
+    "face_blocks": [
+      {
+        "zone_id": 2633,
+        "first": 83085,
+        "last": 1564982,
+        "bc_type": 2,
+        "face_type": 0,
+        "header_line": 1791899
+      },
+      {
+        "zone_id": 20,
+        "first": 1,
+        "last": 81602,
+        "bc_type": 3,
+        "face_type": 3,
+        "header_line": 1873503
+      },
+      {
+        "zone_id": 19,
+        "first": 81603,
+        "last": 81846,
+        "bc_type": 5,
+        "face_type": 0,
+        "header_line": 1873749
+      },
+      {
+        "zone_id": 18,
+        "first": 81847,
+        "last": 82190,
+        "bc_type": 5,
+        "face_type": 0,
+        "header_line": 1874095
+      },
+      {
+        "zone_id": 17,
+        "first": 82191,
+        "last": 83084,
+        "bc_type": 10,
+        "face_type": 0,
+        "header_line": 1874991
+      }
+    ]
+  },
+  "graph_info": {
+    "Nw": 40889,
+    "Fw": 81602,
+    "Ew": 244988,
+    "feature_dim": 7,
+    "wall_bbox_diag": 0.14133280515670776,
+    "wall_zone_ids_used": [
+      20
+    ],
+    "face_counts_by_zone": {
+      "20": 81602
+    }
+  },
+  "normal_mode": "raw",
+  "contract_check": false,
+  "contract_check_info": null,
+  "checkpoint_contract": {
+    "in_dim": 8,
+    "out_dim": 3,
+    "hidden_dim": 128,
+    "num_layers": 6,
+    "dropout": 0.1,
+    "append_re_to_x": true,
+    "normalize_y": true,
+    "re_mu": 288.46153846153845,
+    "re_sd": 179.3726740978628,
+    "y_mu": [
+      -0.004980997648090124,
+      0.15071065723896027,
+      -0.4434037208557129
+    ],
+    "y_sd": [
+      0.8847317099571228,
+      0.6960917115211487,
+      1.0164450407028198
+    ],
+    "best_epoch": 304,
+    "feature_version": "wall_vtx_geom_normXYZ_normals_iswall_v1",
+    "target_version": "wss_vec3_v1",
+    "pipeline_version": "fluent-wss-gnn-pipeline@2026-02-24",
+    "feature_names_inference_expected": [
+      "x_norm",
+      "y_norm",
+      "z_norm",
+      "nx",
+      "ny",
+      "nz",
+      "is_wall",
+      "re_norm"
+    ]
+  },
+  "input_re": 150.0,
+  "feature_dim_built": 8,
+  "prediction_summary": {
+    "num_nodes": 40889,
+    "pred_vec_shape": [
+      40889,
+      3
+    ],
+    "pred_mag_mean": 0.5078537795584909,
+    "pred_mag_std": 0.700286196200128,
+    "pred_mag_min": 0.017343092364065046,
+    "pred_mag_max": 5.645540808118988
+  },
+  "validation_wall_csv": null,
+  "validation_requested": null,
+  "validation_mode_used": null,
+  "validation_metrics": null,
+  "validation_map_info_summary": null,
+  "debug_flipped_normals_validation": null,
+  "outputs": {
+    "csv": "C:\\Users\\radie\\Desktop\\3_Inferencingcode\\INFER_OUT\\coronary2_aligned_pred.csv",
+    "vtp": "C:\\Users\\radie\\Desktop\\3_Inferencingcode\\INFER_OUT\\coronary2_aligned_pred.vtp",
+    "vtp_written": true,
+    "pred_pt": "C:\\Users\\radie\\Desktop\\3_Inferencingcode\\INFER_OUT\\coronary2_aligned_pred.pt"
+  }
+}

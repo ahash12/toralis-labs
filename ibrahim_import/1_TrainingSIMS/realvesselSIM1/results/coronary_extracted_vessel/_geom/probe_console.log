@@ -1,0 +1,169 @@
+
+Opening input/output transcript to file "C:\Users\radie\Desktop\1_TrainingSIMS\realbifurcationSIM\\fluent-20260222-193840-21320.trn".
+Auto-Transcript Start Time:  19:38:40, 22 Feb 2026 E. Australia Standard Time 
+
+              Welcome to ANSYS Fluent 2025 R2.04
+
+              Copyright 1987-2025 ANSYS, Inc. All Rights Reserved.
+              Unauthorized use, distribution or duplication is prohibited.
+              This product is subject to U.S. laws governing export and re-export.
+              For full Legal Notice, see documentation.
+
+Build Time: Oct  7 2025 15:34:38 EDT  Build Id: 10205  
+ 
+Connected License Server List:	1055@localhost
+
+     --------------------------------------------------------------
+     This is an academic version of ANSYS FLUENT. Usage of this product
+     license is limited to the terms and conditions specified in your ANSYS
+     license form, additional terms section.
+     --------------------------------------------------------------
+Host spawning Node 0 on machine "DESKTOP-BBN4MI6" (win64).
+
+-----------------------------------------------------------------------------------
+ID    Hostname         Core  O.S.         PID    Vendor                           
+-----------------------------------------------------------------------------------
+n3    DESKTOP-BBN4MI6  4/12  Windows-x64  6812   Intel(R) Core(TM) i5-10400F      
+n2    DESKTOP-BBN4MI6  3/12  Windows-x64  24372  Intel(R) Core(TM) i5-10400F      
+n1    DESKTOP-BBN4MI6  2/12  Windows-x64  4100   Intel(R) Core(TM) i5-10400F      
+n0*   DESKTOP-BBN4MI6  1/12  Windows-x64  28972  Intel(R) Core(TM) i5-10400F      
+host  DESKTOP-BBN4MI6        Windows-x64  22928  Intel(R) Core(TM) i5-10400F      
+
+MPI Option Selected: intel
+Selected system interconnect: default
+-----------------------------------------------------------------------------------
+
+Cleanup script file is C:\\Users\\radie\\Desktop\\1_TrainingSIMS\\realbifurcationSIM\\cleanup-fluent-DESKTOP-BBN4MI6-22928.bat
+
+Posting ANSYS Product Improvement Program startup data
+Done.
+
+Reading journal file results/coronary_extracted_vessel/_geom/probe_coronary_extracted_vessel.jou...
+
+> ; ===========================================================
+; probe_inlet_geom.jou  (Fluent 25.2 robust, non-interactive)
+; Purpose: Read mesh (.msh) and print inlet area to transcript
+; ===========================================================
+
+/file/set-tui-version "25.2"
+
+> /file/set-batch-options yes no yes
+
+> 
+define/                 parametric-study/       solve/
+display/                plot/                   surface/
+exit                    preferences/            switch-to-meshing-mode
+file/                   print-license-usage     turbo-setup/
+mesh/                   report/                 views/
+parallel/               server/
+
+> /file/read-case "coronary_extracted_vessel.msh"Multicore SMT processors detected. Processor affinity set!
+
+Reading "coronary_extracted_vessel.msh"...
+
+Buffering for file scan...
+
+Warning: Skipping edges zones section(s).
+   24258 nodes.
+   30106 nodes.
+  156879 nodes.
+   57325 triangular wall faces, zone 19.
+    1031 mixed velocity-inlet faces, zone 20.
+     709 mixed pressure-outlet faces, zone 21.
+     267 mixed pressure-outlet faces, zone 22.
+ 1220320 mixed interior faces, zone 3117.
+  567668 mixed cells, zone 3115.
+
+Building...
+     mesh
+	auto partitioning mesh by Metis (fast),
+	distributing mesh
+		parts....,
+		faces....,
+		nodes....,
+		cells....,
+        bandwidth reduction using Reverse Cuthill-McKee: 140694/1073 = 131.122
+     materials,
+     interface,
+     domains,
+     zones,
+	Skipping thread 11 of domain 1 (not referenced by grid).
+	Skipping thread 14 of domain 1 (not referenced by grid).
+	Skipping thread 15 of domain 1 (not referenced by grid).
+	Skipping thread 16 of domain 1 (not referenced by grid).
+	Skipping thread 17 of domain 1 (not referenced by grid).
+	Skipping thread 18 of domain 1 (not referenced by grid).
+	wall-fluid_domain
+	inlet
+	outlet_1
+	outlet_2
+	interior--fluid_domain
+	fluid_domain
+     parallel,
+Done.
+Mesh is now scaled to meters.
+
+
+> 
+adjoint/                parallel/               server/
+define/                 parametric-study/       solve/
+display/                plot/                   surface/
+exit                    preferences/            turbo-setup/
+file/                   print-license-usage     views/
+mesh/                   report/
+
+> /file/start-transcript "results/coronary_extracted_vessel/_geom/inlet_geom_transcript.txt"
+Opening input/output transcript to file "results/coronary_extracted_vessel/_geom/inlet_geom_transcript.txt".
+
+-----------------------------------------------------------------------------------
+ID    Hostname         Core  O.S.         PID    Vendor                           
+-----------------------------------------------------------------------------------
+n3    DESKTOP-BBN4MI6  4/12  Windows-x64  6812   Intel(R) Core(TM) i5-10400F      
+n2    DESKTOP-BBN4MI6  3/12  Windows-x64  24372  Intel(R) Core(TM) i5-10400F      
+n1    DESKTOP-BBN4MI6  2/12  Windows-x64  4100   Intel(R) Core(TM) i5-10400F      
+n0*   DESKTOP-BBN4MI6  1/12  Windows-x64  28972  Intel(R) Core(TM) i5-10400F      
+host  DESKTOP-BBN4MI6        Windows-x64  22928  Intel(R) Core(TM) i5-10400F      
+
+MPI Option Selected: intel
+Selected system interconnect: default
+-----------------------------------------------------------------------------------
+
+
+> 
+adjoint/                parallel/               server/
+define/                 parametric-study/       solve/
+display/                plot/                   surface/
+exit                    preferences/            turbo-setup/
+file/                   print-license-usage     views/
+mesh/                   report/
+
+> ; ---- Area of inlet surface (answer prompts explicitly) ----
+/report/surface-integrals/area
+Available surfaces: (outlet_2 outlet_1 inlet wall-fluid_domain)
+Select surface names/ids(1) [()] inlet
+Select surface names/ids(2) [()] ()
+Write to file? [no] no
+
+                            Area                [m^2]
+-------------------------------- --------------------
+                           inlet        8.8200818e-06
+
+> 
+adjoint/                parallel/               server/
+define/                 parametric-study/       solve/
+display/                plot/                   surface/
+exit                    preferences/            turbo-setup/
+file/                   print-license-usage     views/
+mesh/                   report/
+
+> /file/stop-transcript
+
+Transcript closed.
+
+> /exit yes
+Posting ANSYS Product Improvement Program performance data 
+Done.
+Auto-Transcript Stop Time:  19:39:19, 22 Feb 2026 E. Australia Standard Time 
+Total Transcript Time: 0 Minute 39 Second.
+
+Automatic transcript closed.

@@ -1,0 +1,53 @@
+Transcript Start Time:  19:39:09, 22 Feb 2026 E. Australia Standard Time 
+Current Directory: "C:\Users\radie\Desktop\1_TrainingSIMS\realbifurcationSIM"
+
+Build Time: Oct  7 2025 15:34:38 EDT  Build Id: 10205 
+Executable Path: C:/PROGRA~1/ANSYSI~1/v252/fluent/ntbin/win64/fluent.exe
+
+-----------------------------------------------------------------------------------
+ID    Hostname         Core  O.S.         PID    Vendor                           
+-----------------------------------------------------------------------------------
+n3    DESKTOP-BBN4MI6  4/12  Windows-x64  6812   Intel(R) Core(TM) i5-10400F      
+n2    DESKTOP-BBN4MI6  3/12  Windows-x64  24372  Intel(R) Core(TM) i5-10400F      
+n1    DESKTOP-BBN4MI6  2/12  Windows-x64  4100   Intel(R) Core(TM) i5-10400F      
+n0*   DESKTOP-BBN4MI6  1/12  Windows-x64  28972  Intel(R) Core(TM) i5-10400F      
+host  DESKTOP-BBN4MI6        Windows-x64  22928  Intel(R) Core(TM) i5-10400F      
+
+MPI Option Selected: intel
+Selected system interconnect: default
+-----------------------------------------------------------------------------------
+
+Cortex Process ID: 21320 
+License Server Path: 1055@localhost 
+
+
+> 
+adjoint/                parallel/               server/
+define/                 parametric-study/       solve/
+display/                plot/                   surface/
+exit                    preferences/            turbo-setup/
+file/                   print-license-usage     views/
+mesh/                   report/
+
+> ; ---- Area of inlet surface (answer prompts explicitly) ----
+/report/surface-integrals/area
+Available surfaces: (outlet_2 outlet_1 inlet wall-fluid_domain)
+Select surface names/ids(1) [()] inlet
+Select surface names/ids(2) [()] ()
+Write to file? [no] no
+
+                            Area                [m^2]
+-------------------------------- --------------------
+                           inlet        8.8200818e-06
+
+> 
+adjoint/                parallel/               server/
+define/                 parametric-study/       solve/
+display/                plot/                   surface/
+exit                    preferences/            turbo-setup/
+file/                   print-license-usage     views/
+mesh/                   report/
+
+> /file/stop-transcript
+Transcript Stop Time:  19:39:09, 22 Feb 2026 E. Australia Standard Time 
+Total Transcript Time: 0 Minute 0 Second.

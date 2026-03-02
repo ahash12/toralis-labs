@@ -1,0 +1,126 @@
+; ===========================================================
+; bifurcation_template_robust.jou  (BATCH-SAFE EXPORT FIX)
+; Validated for ANSYS Fluent 2025 R2 (25.2)
+; Mesh -> laminar -> water-liquid -> BCs -> iterate -> export
+; ===========================================================
+
+/file/set-tui-version "25.2"
+/file/set-batch-options yes no yes
+; overwrite files? yes
+; hide questions?  no   (keep no because BC sections still use scripted responses)
+; exit on error?   yes
+
+; Prevent overwrite prompts during export/write
+/file/confirm-overwrite? no
+
+/file/read-case "coronary_extracted_vessel.msh"
+
+; ---------- Models ----------
+/define/models/solver/pressure-based yes
+/define/models/viscous/laminar yes
+
+; ---------- Materials ----------
+/define/materials/copy fluid water-liquid
+/define/boundary-conditions/fluid fluid_domain yes water-liquid
+no
+no
+no
+no
+0
+no
+0
+no
+0
+no
+0
+no
+0
+no
+1
+no
+no
+no
+no
+
+; ---------- Boundary Conditions ----------
+; INLET
+/define/boundary-conditions/velocity-inlet inlet
+no
+no
+yes
+yes
+no
+0.05247229389897205
+no
+0
+
+; OUTLETS
+/define/boundary-conditions/pressure-outlet outlet_1
+yes
+no
+0
+no
+yes
+yes
+no
+no
+no
+
+/define/boundary-conditions/pressure-outlet outlet_2
+yes
+no
+0
+no
+yes
+yes
+no
+no
+no
+
+; WALLS
+/define/boundary-conditions/wall wall-fluid_domain
+no
+no
+
+; ---------- Solution Methods ----------
+/solve/set/p-v-coupling 24
+/solve/set/discretization-scheme/pressure 12
+/solve/set/discretization-scheme/mom 4
+
+; ---------- Solution Controls ----------
+/solve/monitors/residual/convergence-criteria 1e-6 1e-5 1e-5 1e-5
+/solve/monitors/residual/print? yes
+
+; ---------- Initialization ----------
+/solve/initialize/compute-defaults/velocity-inlet inlet
+/solve/initialize/initialize-flow
+
+; ---------- Solve ----------
+/solve/iterate 2500
+
+; ===========================================================
+; DATA EXPORT
+; ===========================================================
+
+/surface/zone-surface interior-data fluid_domain
+
+; Save case and data
+/file/write-case-data "results/coronary_extracted_vessel/Re175/bifurcation_Re175.cas.h5"
+
+; Export interior field data
+/file/export/ascii "results/coronary_extracted_vessel/Re175/interior_full_Re175.csv" interior-data () no x-coordinate y-coordinate z-coordinate pressure x-velocity y-velocity z-velocity velocity-magnitude ()
+; Respond to the single prompt:
+; Location/Cell-Centered? [no]
+no
+
+; Export wall data
+/file/export/ascii "results/coronary_extracted_vessel/Re175/wall_data_Re175.csv" wall-fluid_domain () no x-coordinate y-coordinate z-coordinate pressure wall-shear x-wall-shear y-wall-shear z-wall-shear ()
+; Location/Cell-Centered? [no]
+no
+
+; Export outlet data
+/file/export/ascii "results/coronary_extracted_vessel/Re175/outlets_Re175.csv" outlet_1 outlet_2 () no x-coordinate y-coordinate z-coordinate pressure velocity-magnitude ()
+; Location/Cell-Centered? [no]
+no
+
+/exit yes

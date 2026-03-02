@@ -1,0 +1,165 @@
+{
+  "created_utc": "2026-02-26T06:24:00Z",
+  "msh": "C:\\Users\\radie\\Desktop\\1_TrainingSIMS\\real_coronary_meshes\\model1\\coronary_extracted_vessel.msh",
+  "msh_sha1": "e2b170363edcf70c8f2a3bd75b093db49b573d4d",
+  "ckpt": "C:\\Users\\radie\\Desktop\\2_trainingprocess\\TRAIN_OUT\\best_model.pt",
+  "ckpt_keys_present": [
+    "append_re_to_x",
+    "best_epoch",
+    "best_val_mse_norm",
+    "created_utc",
+    "dropout",
+    "excluded",
+    "feature_version",
+    "files_all",
+    "files_kept",
+    "hidden_dim",
+    "in_dim",
+    "model_state",
+    "normalize_y",
+    "num_layers",
+    "out_dim",
+    "pipeline_version",
+    "re_mu",
+    "re_sd",
+    "split",
+    "target_version",
+    "train_cfg",
+    "y_mu",
+    "y_sd"
+  ],
+  "device": "cpu",
+  "int_mode": "hex",
+  "wall_mode": "auto",
+  "wall_zone_ids": [
+    19
+  ],
+  "wall_auto_min_faces_frac": 0.0,
+  "scan_header": {
+    "msh_path": "C:\\Users\\radie\\Desktop\\1_TrainingSIMS\\real_coronary_meshes\\model1\\coronary_extracted_vessel.msh",
+    "int_mode": "hex",
+    "scaling_factor": 0.001,
+    "node_decl": {
+      "first": 1,
+      "last": 211243
+    },
+    "face_blocks": [
+      {
+        "zone_id": 19,
+        "first": 1,
+        "last": 57325,
+        "bc_type": 3,
+        "face_type": 3,
+        "header_line": 302198
+      },
+      {
+        "zone_id": 20,
+        "first": 57326,
+        "last": 58356,
+        "bc_type": 10,
+        "face_type": 0,
+        "header_line": 303231
+      },
+      {
+        "zone_id": 21,
+        "first": 58357,
+        "last": 59065,
+        "bc_type": 5,
+        "face_type": 0,
+        "header_line": 303942
+      },
+      {
+        "zone_id": 22,
+        "first": 59066,
+        "last": 59332,
+        "bc_type": 5,
+        "face_type": 0,
+        "header_line": 304211
+      },
+      {
+        "zone_id": 3117,
+        "first": 59333,
+        "last": 1279652,
+        "bc_type": 2,
+        "face_type": 0,
+        "header_line": 1524533
+      }
+    ]
+  },
+  "graph_info": {
+    "Nw": 28771,
+    "Fw": 57325,
+    "Ew": 172194,
+    "feature_dim": 7,
+    "wall_bbox_diag": 0.08401114493608475,
+    "wall_zone_ids_used": [
+      19
+    ],
+    "face_counts_by_zone": {
+      "19": 57325
+    }
+  },
+  "normal_mode": "raw",
+  "contract_check": false,
+  "contract_check_info": null,
+  "checkpoint_contract": {
+    "in_dim": 8,
+    "out_dim": 3,
+    "hidden_dim": 128,
+    "num_layers": 6,
+    "dropout": 0.1,
+    "append_re_to_x": true,
+    "normalize_y": true,
+    "re_mu": 288.46153846153845,
+    "re_sd": 179.3726740978628,
+    "y_mu": [
+      -0.004980997648090124,
+      0.15071065723896027,
+      -0.4434037208557129
+    ],
+    "y_sd": [
+      0.8847317099571228,
+      0.6960917115211487,
+      1.0164450407028198
+    ],
+    "best_epoch": 304,
+    "feature_version": "wall_vtx_geom_normXYZ_normals_iswall_v1",
+    "target_version": "wss_vec3_v1",
+    "pipeline_version": "fluent-wss-gnn-pipeline@2026-02-24",
+    "feature_names_inference_expected": [
+      "x_norm",
+      "y_norm",
+      "z_norm",
+      "nx",
+      "ny",
+      "nz",
+      "is_wall",
+      "re_norm"
+    ]
+  },
+  "input_re": 150.0,
+  "feature_dim_built": 8,
+  "prediction_summary": {
+    "num_nodes": 28771,
+    "pred_vec_shape": [
+      28771,
+      3
+    ],
+    "pred_mag_mean": 0.3039609857567477,
+    "pred_mag_std": 0.4132760763168203,
+    "pred_mag_min": 0.021003760511861223,
+    "pred_mag_max": 9.601540654450542
+  },
+  "validation_wall_csv": null,
+  "validation_requested": null,
+  "validation_mode_used": null,
+  "validation_metrics": null,
+  "validation_map_info_summary": null,
+  "debug_flipped_normals_validation": null,
+  "outputs": {
+    "csv": "C:\\Users\\radie\\Desktop\\3_Inferencingcode\\INFER_OUT\\coronary_extracted_vessel_pred.csv",
+    "vtp": "C:\\Users\\radie\\Desktop\\3_Inferencingcode\\INFER_OUT\\coronary_extracted_vessel_pred.vtp",
+    "vtp_written": true,
+    "pred_pt": "C:\\Users\\radie\\Desktop\\3_Inferencingcode\\INFER_OUT\\coronary_extracted_vessel_pred.pt"
+  }
+}

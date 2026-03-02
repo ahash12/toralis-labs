@@ -1,0 +1,20 @@
+; ===========================================================
+; probe_inlet_geom.jou  (Fluent 25.2 robust, non-interactive)
+; Purpose: Read mesh (.msh) and print inlet area to transcript
+; ===========================================================
+
+/file/set-tui-version "25.2"
+/file/set-batch-options yes no yes
+
+/file/read-case "coronary_extracted_vessel.msh"
+
+/file/start-transcript "results/coronary_extracted_vessel/_geom/inlet_geom_transcript.txt"
+
+; ---- Area of inlet surface (answer prompts explicitly) ----
+/report/surface-integrals/area
+inlet
+()
+no
+
+/file/stop-transcript
+/exit yes

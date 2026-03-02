@@ -1,0 +1,567 @@
+
+Opening input/output transcript to file "C:\Users\radie\Desktop\1_TrainingSIMS\realbifurcationSIM\\fluent-20260222-205319-28368.trn".
+Auto-Transcript Start Time:  20:53:19, 22 Feb 2026 E. Australia Standard Time 
+
+              Welcome to ANSYS Fluent 2025 R2.04
+
+              Copyright 1987-2025 ANSYS, Inc. All Rights Reserved.
+              Unauthorized use, distribution or duplication is prohibited.
+              This product is subject to U.S. laws governing export and re-export.
+              For full Legal Notice, see documentation.
+
+Build Time: Oct  7 2025 15:34:38 EDT  Build Id: 10205  
+ 
+Connected License Server List:	1055@localhost
+
+     --------------------------------------------------------------
+     This is an academic version of ANSYS FLUENT. Usage of this product
+     license is limited to the terms and conditions specified in your ANSYS
+     license form, additional terms section.
+     --------------------------------------------------------------
+Host spawning Node 0 on machine "DESKTOP-BBN4MI6" (win64).
+
+-----------------------------------------------------------------------------------
+ID    Hostname         Core  O.S.         PID    Vendor                           
+-----------------------------------------------------------------------------------
+n3    DESKTOP-BBN4MI6  4/12  Windows-x64  25080  Intel(R) Core(TM) i5-10400F      
+n2    DESKTOP-BBN4MI6  3/12  Windows-x64  22552  Intel(R) Core(TM) i5-10400F      
+n1    DESKTOP-BBN4MI6  2/12  Windows-x64  29084  Intel(R) Core(TM) i5-10400F      
+n0*   DESKTOP-BBN4MI6  1/12  Windows-x64  7688   Intel(R) Core(TM) i5-10400F      
+host  DESKTOP-BBN4MI6        Windows-x64  22324  Intel(R) Core(TM) i5-10400F      
+
+MPI Option Selected: intel
+Selected system interconnect: default
+-----------------------------------------------------------------------------------
+
+Cleanup script file is C:\\Users\\radie\\Desktop\\1_TrainingSIMS\\realbifurcationSIM\\cleanup-fluent-DESKTOP-BBN4MI6-22324.bat
+
+Posting ANSYS Product Improvement Program startup data
+Done.
+
+Reading journal file results/coronary_extracted_vessel/Re75/run_coronary_extracted_vessel_Re75.jou...
+
+> ; ===========================================================
+; bifurcation_template_robust.jou  (BATCH-SAFE EXPORT FIX)
+; Validated for ANSYS Fluent 2025 R2 (25.2)
+; Mesh -> laminar -> water-liquid -> BCs -> iterate -> export
+; ===========================================================
+
+/file/set-tui-version "25.2"
+
+> /file/set-batch-options yes no yes
+
+> ; overwrite files? yes
+; hide questions?  no   (keep no because BC sections still use scripted responses)
+; exit on error?   yes
+
+define/                 parametric-study/       solve/
+display/                plot/                   surface/
+exit                    preferences/            switch-to-meshing-mode
+file/                   print-license-usage     turbo-setup/
+mesh/                   report/                 views/
+parallel/               server/
+
+> ; Prevent overwrite prompts during export/write
+/file/confirm-overwrite? no
+
+> 
+define/                 parametric-study/       solve/
+display/                plot/                   surface/
+exit                    preferences/            switch-to-meshing-mode
+file/                   print-license-usage     turbo-setup/
+mesh/                   report/                 views/
+parallel/               server/
+
+> /file/read-case "coronary_extracted_vessel.msh"Multicore SMT processors detected. Processor affinity set!
+
+Reading "coronary_extracted_vessel.msh"...
+
+Buffering for file scan...
+
+Warning: Skipping edges zones section(s).
+   24258 nodes.
+   30106 nodes.
+  156879 nodes.
+   57325 triangular wall faces, zone 19.
+    1031 mixed velocity-inlet faces, zone 20.
+     709 mixed pressure-outlet faces, zone 21.
+     267 mixed pressure-outlet faces, zone 22.
+ 1220320 mixed interior faces, zone 3117.
+  567668 mixed cells, zone 3115.
+
+Building...
+     mesh
+	auto partitioning mesh by Metis (fast),
+	distributing mesh
+		parts....,
+		faces....,
+		nodes....,
+		cells....,
+        bandwidth reduction using Reverse Cuthill-McKee: 140694/1073 = 131.122
+     materials,
+     interface,
+     domains,
+     zones,
+	Skipping thread 11 of domain 1 (not referenced by grid).
+	Skipping thread 14 of domain 1 (not referenced by grid).
+	Skipping thread 15 of domain 1 (not referenced by grid).
+	Skipping thread 16 of domain 1 (not referenced by grid).
+	Skipping thread 17 of domain 1 (not referenced by grid).
+	Skipping thread 18 of domain 1 (not referenced by grid).
+	wall-fluid_domain
+	inlet
+	outlet_1
+	outlet_2
+	interior--fluid_domain
+	fluid_domain
+     parallel,
+Done.
+Mesh is now scaled to meters.
+
+
+> 
+adjoint/                parallel/               server/
+define/                 parametric-study/       solve/
+display/                plot/                   surface/
+exit                    preferences/            turbo-setup/
+file/                   print-license-usage     views/
+mesh/                   report/
+
+> ; ---------- Models ----------
+/define/models/solver/pressure-based yes
+
+> /define/models/viscous/laminar yes
+
+> 
+adjoint/                parallel/               server/
+define/                 parametric-study/       solve/
+display/                plot/                   surface/
+exit                    preferences/            turbo-setup/
+file/                   print-license-usage     views/
+mesh/                   report/
+
+> ; ---------- Materials ----------
+/define/materials/copy fluid water-liquid
+
+Material "water-liquid" copied from database: fluent-database.
+
+
+> /define/boundary-conditions/fluid (fluid_domain)
+fluid_domain yes water-liquid
+Specify source terms? [no] no
+Specify fixed values? [no] no
+Frame Motion? [no] no
+Use Profile for Reference Frame X-Origin of Rotation-Axis? [no] no
+Reference Frame X-Origin of Rotation-Axis (constant or expression) (in [m]) [0] 0
+Use Profile for Reference Frame Y-Origin of Rotation-Axis? [no] no
+Reference Frame Y-Origin of Rotation-Axis (constant or expression) (in [m]) [0] 0
+Use Profile for Reference Frame Z-Origin of Rotation-Axis? [no] no
+Reference Frame Z-Origin of Rotation-Axis (constant or expression) (in [m]) [0] 0
+Use Profile for Reference Frame X-Component of Rotation-Axis? [no] no
+Reference Frame X-Component of Rotation-Axis (constant or expression) [0] 0
+Use Profile for Reference Frame Y-Component of Rotation-Axis? [no] no
+Reference Frame Y-Component of Rotation-Axis (constant or expression) [0] 0
+Use Profile for Reference Frame Z-Component of Rotation-Axis? [no] no
+Reference Frame Z-Component of Rotation-Axis (constant or expression) [1] 1
+Mesh Motion? [no] no
+Enter yes or no to continue [no] no
+Porous zone? [no] no
+3D Fan Zone? [no] no
+
+> 
+adjoint/                parallel/               server/
+define/                 parametric-study/       solve/
+display/                plot/                   surface/
+exit                    preferences/            turbo-setup/
+file/                   print-license-usage     views/
+mesh/                   report/
+
+> ; ---------- Boundary Conditions ----------
+; INLET
+/define/boundary-conditions/velocity-inlet (inlet)
+inlet
+Velocity Specification Method: Magnitude and Direction [no] no
+Velocity Specification Method: Components [no] no
+Velocity Specification Method: Magnitude, Normal to Boundary [yes] yes
+Reference Frame: Absolute [yes] yes
+Use Profile for Velocity Magnitude? [no] no
+Velocity Magnitude (constant or expression) (in [m/s]) [0] 0.02248812595670231
+Use Profile for Supersonic/Initial Gauge Pressure? [no] no
+Supersonic/Initial Gauge Pressure (constant or expression) (in [Pa]) [0] 0
+
+> 
+adjoint/                parallel/               server/
+define/                 parametric-study/       solve/
+display/                plot/                   surface/
+exit                    preferences/            turbo-setup/
+file/                   print-license-usage     views/
+mesh/                   report/
+
+> ; OUTLETS
+/define/boundary-conditions/pressure-outlet (outlet_2 outlet_1)
+outlet_1
+Backflow Reference Frame: Absolute [yes] yes
+Use Profile for Gauge Pressure? [no] no
+Gauge Pressure (constant or expression) (in [Pa]) [0] 0
+Backflow Direction Specification Method: Direction Vector [no] no
+Backflow Direction Specification Method: Normal to Boundary [yes] yes
+Backflow Pressure Specification: Total Pressure [yes] yes
+Radial Equilibrium Pressure Distribution [no] no
+Average Pressure Specification? [no] no
+Specify targeted mass flow rate [no] no
+
+> 
+adjoint/                parallel/               server/
+define/                 parametric-study/       solve/
+display/                plot/                   surface/
+exit                    preferences/            turbo-setup/
+file/                   print-license-usage     views/
+mesh/                   report/
+
+> /define/boundary-conditions/pressure-outlet (outlet_2 outlet_1)
+outlet_2
+Backflow Reference Frame: Absolute [yes] yes
+Use Profile for Gauge Pressure? [no] no
+Gauge Pressure (constant or expression) (in [Pa]) [0] 0
+Backflow Direction Specification Method: Direction Vector [no] no
+Backflow Direction Specification Method: Normal to Boundary [yes] yes
+Backflow Pressure Specification: Total Pressure [yes] yes
+Radial Equilibrium Pressure Distribution [no] no
+Average Pressure Specification? [no] no
+Specify targeted mass flow rate [no] no
+
+> 
+adjoint/                parallel/               server/
+define/                 parametric-study/       solve/
+display/                plot/                   surface/
+exit                    preferences/            turbo-setup/
+file/                   print-license-usage     views/
+mesh/                   report/
+
+> ; WALLS
+/define/boundary-conditions/wall (wall-fluid_domain)
+wall-fluid_domain
+Wall Motion [motion-bc-stationary]: Change current value? [no] no
+Shear Boundary Condition [shear-bc-noslip]: Change current value? [no] no
+
+> 
+adjoint/                parallel/               server/
+define/                 parametric-study/       solve/
+display/                plot/                   surface/
+exit                    preferences/            turbo-setup/
+file/                   print-license-usage     views/
+mesh/                   report/
+
+> ; ---------- Solution Methods ----------
+/solve/set/p-v-coupling 24
+
+> /solve/set/discretization-scheme/pressure 12
+
+> /solve/set/discretization-scheme/mom 4
+
+> 
+adjoint/                parallel/               server/
+define/                 parametric-study/       solve/
+display/                plot/                   surface/
+exit                    preferences/            turbo-setup/
+file/                   print-license-usage     views/
+mesh/                   report/
+
+> ; ---------- Solution Controls ----------
+/solve/monitors/residual/convergence-criteria 1e-6 1e-5 1e-5 1e-5
+
+> /solve/monitors/residual/print? yes
+
+> 
+adjoint/                parallel/               server/
+define/                 parametric-study/       solve/
+display/                plot/                   surface/
+exit                    preferences/            turbo-setup/
+file/                   print-license-usage     views/
+mesh/                   report/
+
+> ; ---------- Initialization ----------
+/solve/initialize/compute-defaults/velocity-inlet (inlet)
+inlet
+
+> /solve/initialize/initialize-flow
+
+> 
+adjoint/                parallel/               server/
+define/                 parametric-study/       solve/
+display/                plot/                   surface/
+exit                    preferences/            turbo-setup/
+file/                   print-license-usage     views/
+mesh/                   report/
+
+> ; ---------- Solve ----------
+/solve/iterate 2500
+
+  iter  continuity  x-velocity  y-velocity  z-velocity     time/iter
+
+ Reversed flow on 709 faces (100.0% area) of pressure-outlet 21.
+     1  1.0000e+00  1.2429e-02  1.5912e-02  3.9334e-03  1:37:01 2499
+
+ Reversed flow on 201 faces (11.9% area) of pressure-outlet 21.
+     2  7.1605e-01  1.3075e-02  1.7022e-02  5.2077e-03  1:32:07 2498
+
+ Reversed flow on 291 faces (17.4% area) of pressure-outlet 21.
+     3  3.6410e-01  5.1585e-03  6.1167e-03  3.1463e-03  1:24:35 2497
+
+ Reversed flow on 253 faces (14.6% area) of pressure-outlet 21.
+     4  2.3910e-01  2.6377e-03  2.9320e-03  2.0430e-03  1:18:36 2496
+
+ Reversed flow on 207 faces (11.3% area) of pressure-outlet 21.
+     5  1.7334e-01  1.4289e-03  1.4995e-03  1.3410e-03  1:16:42 2495
+
+ Reversed flow on 145 faces (7.2% area) of pressure-outlet 21.
+     6  1.3829e-01  8.5003e-04  8.4886e-04  9.2673e-04  1:12:13 2494
+
+ Reversed flow on 113 faces (5.3% area) of pressure-outlet 21.
+     7  1.0960e-01  5.5835e-04  5.3244e-04  6.7350e-04  1:11:32 2493
+
+ Reversed flow on 74 faces (3.4% area) of pressure-outlet 21.
+     8  8.7977e-02  3.9660e-04  3.6853e-04  5.0911e-04  1:08:06 2492
+
+ Reversed flow on 59 faces (2.6% area) of pressure-outlet 21.
+     9  6.8639e-02  2.9433e-04  2.7035e-04  3.8925e-04  1:08:15 2491
+
+ Reversed flow on 44 faces (1.9% area) of pressure-outlet 21.
+    10  5.4654e-02  2.2993e-04  2.0933e-04  3.1176e-04  1:08:18 2490
+
+ Reversed flow on 29 faces (1.1% area) of pressure-outlet 21.
+    11  4.3159e-02  1.8220e-04  1.6532e-04  2.4722e-04  1:08:23 2489
+
+ Reversed flow on 22 faces (0.9% area) of pressure-outlet 21.
+
+  iter  continuity  x-velocity  y-velocity  z-velocity     time/iter
+    12  3.4133e-02  1.4564e-04  1.3201e-04  1.9771e-04  1:08:26 2488
+
+ Reversed flow on 13 faces (0.5% area) of pressure-outlet 21.
+    13  2.7151e-02  1.1763e-04  1.0585e-04  1.5800e-04  1:08:29 2487
+
+ Reversed flow on 8 faces (0.2% area) of pressure-outlet 21.
+    14  2.1856e-02  9.6330e-05  8.6020e-05  1.2800e-04  1:08:40 2486
+
+ Reversed flow on 6 faces (0.1% area) of pressure-outlet 21.
+    15  1.7919e-02  8.0226e-05  7.1154e-05  1.0536e-04  1:08:38 2485
+
+ Reversed flow on 6 faces (0.1% area) of pressure-outlet 21.
+    16  1.4896e-02  6.7396e-05  5.9350e-05  8.7460e-05  1:11:35 2484
+
+ Reversed flow on 6 faces (0.1% area) of pressure-outlet 21.
+    17  1.2843e-02  5.8454e-05  5.1536e-05  7.5232e-05  1:11:00 2483
+
+ Reversed flow on 4 faces (0.1% area) of pressure-outlet 21.
+    18  1.0709e-02  4.8555e-05  4.2410e-05  6.1917e-05  1:10:27 2482
+
+ Reversed flow on 4 faces (0.1% area) of pressure-outlet 21.
+    19  8.9452e-03  4.0760e-05  3.5513e-05  5.1488e-05  1:10:04 2481
+
+ Reversed flow on 4 faces (0.2% area) of pressure-outlet 21.
+    20  7.4713e-03  3.4229e-05  2.9676e-05  4.2739e-05  1:06:50 2480
+
+ Reversed flow on 6 faces (0.3% area) of pressure-outlet 21.
+    21  6.0924e-03  2.8051e-05  2.4226e-05  3.4771e-05  1:04:18 2479
+
+ Reversed flow on 3 faces (0.1% area) of pressure-outlet 21.
+    22  5.0025e-03  2.3207e-05  1.9970e-05  2.8662e-05  1:02:14 2478
+
+  iter  continuity  x-velocity  y-velocity  z-velocity     time/iter
+    23  4.1308e-03  1.9306e-05  1.6572e-05  2.3748e-05  1:03:29 2477
+    24  3.5072e-03  1.6489e-05  1.4091e-05  2.0173e-05  1:01:33 2476
+    25  2.9126e-03  1.3701e-05  1.1607e-05  1.6683e-05  1:02:53 2475
+    26  2.4775e-03  1.1695e-05  9.8562e-06  1.4207e-05  1:01:04 2474
+    27  2.0563e-03  9.6913e-06  8.0759e-06  1.1707e-05  1:02:29 2473
+    28  1.7589e-03  8.3331e-06  6.8991e-06  1.0069e-05  1:03:39 2472
+    29  1.5174e-03  7.1760e-06  5.8822e-06  8.6892e-06  1:04:33 2471
+    30  1.3072e-03  6.1301e-06  4.9639e-06  7.4485e-06  1:05:20 2470
+    31  1.1238e-03  5.2372e-06  4.2213e-06  6.4042e-06  1:05:51 2469
+    32  9.6417e-04  4.4806e-06  3.6018e-06  5.5154e-06  1:03:25 2468
+    33  8.1077e-04  3.7660e-06  3.0180e-06  4.6497e-06  1:01:29 2467
+
+  iter  continuity  x-velocity  y-velocity  z-velocity     time/iter
+    34  6.8729e-04  3.1978e-06  2.5513e-06  3.9603e-06  0:59:53 2466
+    35  5.8438e-04  2.7275e-06  2.1744e-06  3.3923e-06  0:58:36 2465
+    36  4.9899e-04  2.3380e-06  1.8635e-06  2.9203e-06  0:57:36 2464
+    37  4.2956e-04  2.0218e-06  1.5995e-06  2.5258e-06  0:56:45 2463
+    38  3.7165e-04  1.7530e-06  1.3762e-06  2.1841e-06  0:56:04 2462
+    39  3.2072e-04  1.5134e-06  1.1887e-06  1.8860e-06  0:55:32 2461
+    40  2.7716e-04  1.3097e-06  1.0298e-06  1.6338e-06  0:57:59 2460
+    41  2.4678e-04  1.1663e-06  9.1312e-07  1.4518e-06  0:57:05 2459
+    42  2.1395e-04  1.0027e-06  7.8151e-07  1.2430e-06  0:56:24 2458
+    43  1.8432e-04  8.6182e-07  6.7476e-07  1.0696e-06  0:55:51 2457
+    44  1.5924e-04  7.4681e-07  5.8781e-07  9.2658e-07  0:58:14 2456
+
+  iter  continuity  x-velocity  y-velocity  z-velocity     time/iter
+    45  1.4248e-04  6.6878e-07  5.2472e-07  8.2545e-07  0:57:16 2455
+    46  1.2369e-04  5.7691e-07  4.5119e-07  7.0848e-07  0:56:31 2454
+    47  1.0632e-04  4.9413e-07  3.9063e-07  6.0920e-07  0:55:51 2453
+    48  9.1868e-05  4.2990e-07  3.4172e-07  5.2801e-07  0:55:23 2452
+    49  8.0180e-05  3.7497e-07  2.9759e-07  4.5927e-07  0:54:58 2451
+    50  6.9858e-05  3.2573e-07  2.5861e-07  3.9824e-07  0:54:37 2450
+    51  6.0259e-05  2.8090e-07  2.2619e-07  3.4507e-07  0:54:21 2449
+    52  5.2403e-05  2.4599e-07  1.9793e-07  3.0015e-07  0:54:08 2448
+    53  4.5892e-05  2.1556e-07  1.7216e-07  2.6114e-07  0:53:56 2447
+    54  3.9839e-05  1.8637e-07  1.4905e-07  2.2592e-07  0:53:46 2446
+    55  3.4372e-05  1.6075e-07  1.3002e-07  1.9543e-07  0:53:39 2445
+
+  iter  continuity  x-velocity  y-velocity  z-velocity     time/iter
+    56  2.9906e-05  1.4141e-07  1.1415e-07  1.6964e-07  0:53:31 2444
+    57  2.6205e-05  1.2337e-07  9.9171e-08  1.4740e-07  0:53:28 2443
+    58  2.2702e-05  1.0637e-07  8.6236e-08  1.2765e-07  0:53:24 2442
+    59  1.9629e-05  9.2820e-08  7.5623e-08  1.1069e-07  0:53:19 2441
+    60  1.7174e-05  8.1577e-08  6.6033e-08  9.6379e-08  0:53:16 2440
+    61  1.5023e-05  7.1092e-08  5.7600e-08  8.3930e-08  0:53:12 2439
+    62  1.2993e-05  6.1283e-08  5.0147e-08  7.2654e-08  0:53:07 2438
+    63  1.1278e-05  5.4053e-08  4.4250e-08  6.3277e-08  0:53:07 2437
+    64  9.9124e-06  4.7512e-08  3.8618e-08  5.5396e-08  0:53:05 2436
+    65  8.6722e-06  4.1377e-08  3.3745e-08  4.8194e-08  0:53:02 2435
+    66  7.4999e-06  3.5838e-08  2.9642e-08  4.1897e-08  0:53:04 2434
+
+  iter  continuity  x-velocity  y-velocity  z-velocity     time/iter
+    67  6.5398e-06  3.1734e-08  2.6186e-08  3.6537e-08  0:53:00 2433
+    68  5.7633e-06  2.7883e-08  2.2902e-08  3.2085e-08  0:52:58 2432
+    69  5.0283e-06  2.4253e-08  2.0028e-08  2.7910e-08  0:53:00 2431
+    70  4.3606e-06  2.1307e-08  1.7712e-08  2.4377e-08  0:52:59 2430
+    71  3.8304e-06  1.8980e-08  1.5678e-08  2.1428e-08  0:52:54 2429
+    72  3.3907e-06  1.6739e-08  1.3825e-08  1.8867e-08  0:52:54 2428
+    73  2.9613e-06  1.4576e-08  1.2176e-08  1.6485e-08  0:52:51 2427
+    74  2.5828e-06  1.2954e-08  1.0841e-08  1.4460e-08  0:52:49 2426
+    75  2.2908e-06  1.1561e-08  9.6078e-09  1.2791e-08  0:52:46 2425
+    76  2.0315e-06  1.0231e-08  8.5441e-09  1.1293e-08  0:52:43 2424
+    77  1.7785e-06  8.9789e-09  7.5985e-09  9.9088e-09  0:52:42 2423
+
+  iter  continuity  x-velocity  y-velocity  z-velocity     time/iter
+    78  1.5671e-06  8.0737e-09  6.8340e-09  8.7769e-09  0:52:41 2422
+    79  1.4038e-06  7.2266e-09  6.0915e-09  7.8167e-09  0:52:43 2421
+    80  1.2491e-06  6.4033e-09  5.4399e-09  6.9167e-09  0:52:43 2420
+    81  1.0998e-06  5.6845e-09  4.9048e-09  6.1135e-09  0:52:40 2419
+    82  9.7951e-07  5.1618e-09  4.4448e-09  5.4536e-09  0:52:39 2418
+!   82 solution is converged
+
+> 
+adjoint/                parallel/               server/
+define/                 parametric-study/       solve/
+display/                plot/                   surface/
+exit                    preferences/            turbo-setup/
+file/                   print-license-usage     views/
+mesh/                   report/
+
+> ; ===========================================================
+; DATA EXPORT
+; ===========================================================
+
+adjoint/                parallel/               server/
+define/                 parametric-study/       solve/
+display/                plot/                   surface/
+exit                    preferences/            turbo-setup/
+file/                   print-license-usage     views/
+mesh/                   report/
+
+> /surface/zone-surface interior-data fluid_domain
+
+> 
+adjoint/                parallel/               server/
+define/                 parametric-study/       solve/
+display/                plot/                   surface/
+exit                    preferences/            turbo-setup/
+file/                   print-license-usage     views/
+mesh/                   report/
+
+> ; Save case and data
+/file/write-case-data "results/coronary_extracted_vessel/Re75/bifurcation_Re75.cas.h5"Fast-loading "C:\PROGRA~1\ANSYSI~1\v252\fluent\fluent25.2.0\\addons\afd\lib\hdfio.bin"
+Done.
+
+Writing to DESKTOP-BBN4MI6:"C:\Users\radie\Desktop\1_TrainingSIMS\realbifurcationSIM\results/coronary_extracted_vessel/Re75/bifurcation_Re75.cas.h5" in NODE0 mode and compression level 1 ...
+Grouping cells for Laplace smoothing ...
+      567668 cells,     1 zone  ...
+     1279652 faces,     5 zones ...
+      211243 nodes,     1 zone  ...
+  Done.
+Done.
+
+Writing to DESKTOP-BBN4MI6:"C:\Users\radie\Desktop\1_TrainingSIMS\realbifurcationSIM\results/coronary_extracted_vessel/Re75/bifurcation_Re75.dat.h5" in NODE0 mode and compression level 1 ...
+  Writing results.
+Done.
+
+
+> 
+adjoint/                parallel/               server/
+define/                 parametric-study/       solve/
+display/                plot/                   surface/
+exit                    preferences/            turbo-setup/
+file/                   print-license-usage     views/
+mesh/                   report/
+
+> ; Export interior field data
+/file/export/ascii "results/coronary_extracted_vessel/Re75/interior_full_Re75.csv" interior-data () no x-coordinate y-coordinate z-coordinate pressure x-velocity y-velocity z-velocity velocity-magnitude ()
+
+Location/Cell-Centered?,
+if Cell-Centered not chosen, node values of scalars are reported [no] ; Respond to the single prompt:
+; Location/Cell-Centered? [no]
+no
+
+Writing "results/coronary_extracted_vessel/Re75/interior_full_Re75.csv"...
+
+Writing information to ascii file ...
+Done.
+
+
+> 
+adjoint/                parallel/               server/
+define/                 parametric-study/       solve/
+display/                plot/                   surface/
+exit                    preferences/            turbo-setup/
+file/                   print-license-usage     views/
+mesh/                   report/
+
+> ; Export wall data
+/file/export/ascii "results/coronary_extracted_vessel/Re75/wall_data_Re75.csv" wall-fluid_domain () no x-coordinate y-coordinate z-coordinate pressure wall-shear x-wall-shear y-wall-shear z-wall-shear ()
+
+Location/Cell-Centered?,
+if Cell-Centered not chosen, node values of scalars are reported [no] ; Location/Cell-Centered? [no]
+no
+
+Writing "results/coronary_extracted_vessel/Re75/wall_data_Re75.csv"...
+
+Writing information to ascii file ...
+Done.
+
+
+> 
+adjoint/                parallel/               server/
+define/                 parametric-study/       solve/
+display/                plot/                   surface/
+exit                    preferences/            turbo-setup/
+file/                   print-license-usage     views/
+mesh/                   report/
+
+> ; Export outlet data
+/file/export/ascii "results/coronary_extracted_vessel/Re75/outlets_Re75.csv" outlet_1 outlet_2 () no x-coordinate y-coordinate z-coordinate pressure velocity-magnitude ()
+
+Location/Cell-Centered?,
+if Cell-Centered not chosen, node values of scalars are reported [no] ; Location/Cell-Centered? [no]
+no
+
+Writing "results/coronary_extracted_vessel/Re75/outlets_Re75.csv"...
+
+Writing information to ascii file ...
+Done.
+
+
+> 
+adjoint/                parallel/               server/
+define/                 parametric-study/       solve/
+display/                plot/                   surface/
+exit                    preferences/            turbo-setup/
+file/                   print-license-usage     views/
+mesh/                   report/
+
+> /exit 
+Posting ANSYS Product Improvement Program performance data 
+Done.
+Auto-Transcript Stop Time:  20:56:00, 22 Feb 2026 E. Australia Standard Time 
+Total Transcript Time: 2 Minute 40 Second.
+
+Automatic transcript closed.
